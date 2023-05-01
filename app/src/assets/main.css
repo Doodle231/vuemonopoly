@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    .space {
+      @apply  text-center ; 
+    }
+    .propertyprice {
+      @apply  mt-5; 
+    }
+    .boardicon { 
+      @apply w-[50%] h-[40%] ml-[25%] mt-3; 
+    }
+
+}
