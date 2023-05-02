@@ -7,69 +7,64 @@ export default {
 <template>
   
   <div id = "gameboard" class ="grid grid-cols-11 grid-rows-11  mt-4 relative w-[100vw] md:w-[60vw] md:ml-10
-  md:mt-20 h-[90vh] bg-[#9DD2B4]  ">
+  md:mt-10 h-[90vh] bg-[#9DD2B4]  ">
 
   <div id = "logo" class ="absolute z-99 text-[10vw] top-[25%] left-[10%] text-rose-800">Monopoly </div>
   
   
     <div id ="top-row" class ="grid grid-cols-11 col-start-1  col-end-12 relative  row-span-2  ">
   <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950  border-l-2  " >
-  <div class ="card-top bg-blue-300 border-stone-950 border-y h-1/4 border-l-2 "></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
-
+  <div class ="space-name text-xs mt-4">Free Parking</div>
   </div>
 
   <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950  " >
-  <div class ="card-top bg-blue-300 border-stone-950 border-y h-1/4"></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
+  <div class ="card-top bg-red-700 border-stone-950 border-y h-1/4"></div>
+  <div class ="space-name text-xs mt-4">Kentucky Avenue </div>
+  <div class ="propertyprice">220</div>
   </div>
 
   <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 " >
-  <div class ="card-top bg-blue-300 border-stone-950 border-y h-1/4"></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
+  <div class ="space-name text-xs mt-4">Chance</div>
   </div>
+
   <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 " >
-  <div class ="card-top bg-blue-300 border-stone-950 border-y h-1/4"></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
+  <div class ="card-top bg-red-700 border-stone-950 border-y h-1/4"></div>
+  <div class ="space-name text-xs mt-4">Indiana Avenue</div>
+  <div class ="propertyprice">220</div>
   </div>
   <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950  " >
-  <div class ="card-top bg-blue-300 border-stone-950 border-y h-1/4"></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
+  <div class ="card-top bg-red-700 border-stone-950 border-y h-1/4"></div>
+  <div class ="space-name text-xs mt-4">Illinois Avenue</div>
+  <div class ="propertyprice">240</div>
   </div>
   <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950  " >
-  <div class ="card-top bg-blue-300 border-stone-950 border-y h-1/4"></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
+  
+  <div class ="space-name text-xs mt-4">B & B Railroad</div>
+  <div class ="propertyprice">200</div>
   </div>
   <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 " >
-  <div class ="card-top bg-blue-300 border-stone-950 border-y h-1/4"></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
+  <div class ="card-top bg-yellow-300 border-stone-950 border-y h-1/4"></div>
+  <div class ="space-name text-xs mt-4">Atlantic Avenue </div>
+  <div class ="propertyprice">260</div>
   </div>
   <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 " >
-  <div class ="card-top bg-blue-300 border-stone-950 border-y h-1/4"></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
+  <div class ="card-top bg-yellow-300 border-stone-950 border-y h-1/4"></div>
+  <div class ="space-name text-xs mt-4">Ventor Avenue</div>
+  <div class ="propertyprice">260</div>
   </div>
   <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 " >
-  <div class ="card-top bg-blue-300 border-stone-950 border-y h-1/4"></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
+ 
+  <div class ="space-name text-xs mt-4">Water Works</div>
+  <div class ="propertyprice">150</div>
   </div>
   <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 " >
-  <div class ="card-top bg-blue-300 border-stone-950 border-y h-1/4"></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
+  <div class ="card-top bg-yellow-300 border-stone-950 border-y h-1/4"></div>
+  <div class ="space-name text-xs mt-4">Marvin Gardens </div>
+  <div class ="propertyprice">280</div>
   </div>
+  
   <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 " >
-  <div class ="card-top bg-blue-300 border-y h-1/4 border-stone-950"></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
+  <div class ="space-name text-xs mt-4">Jail</div>
   </div>
 
 </div> 
@@ -77,51 +72,49 @@ export default {
 <div id ="left-column" class ="grid grid-rows-12 row-start-3 absolute w-[5.5vw]  ">
   <div class ="space bg-[#9DD2B4] border-x-orange-500  border-r-[2vw] h-[8vh] border-l-2" >
   <div class ="card-top bg-yellow-500 border-stone-950 border-y  border-l-2 "></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
+  <div class ="space-name text-xs mt-4">New York Avenue </div>
+  <div class ="propertyprice">200</div>
   </div>
 
   
-  <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 h-[8vh]  border-l-2" >
+  <div class ="space  bg-[#9DD2B4] border-x-orange-500  border-r-[2vw] h-[8vh] border-l-2" >
   <div class ="card-top bg-blue-300 border-stone-950 border-y "></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
+  <div class ="space-name text-xs   mt-[25%]">Tenessee Avenue </div>
+  <div class ="propertyprice">180</div>
+  </div>
+  <div class ="space bg-[#9DD2B4] border-x-orange-500  border-r-[2vw] h-[8vh] border-l-2" >
+  <div class ="space-name text-xs mt-4">Community Chest</div>
   <div class ="propertyprice"></div>
   </div>
-  <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 h-[8vh]  border-l-2" >
+  <div class ="space bg-[#9DD2B4] border-x-orange-500  border-r-[2vw] h-[8vh] border-l-2 " >
   <div class ="card-top bg-blue-300 border-stone-950 border-y "></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
-  </div>
-  <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 h-[8vh] border-l-2 " >
-  <div class ="card-top bg-blue-300 border-stone-950 border-y "></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
-  </div>
-  <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 h-[8vh] border-l-2" >
-  <div class ="card-top bg-blue-300 border-stone-950 border-y "></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
+  <div class ="space-name text-xs mt-4">St. James Place</div>
+  <div class ="propertyprice">180</div>
   </div>
   <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 h-[8vh] border-l-2" >
   <div class ="card-top bg-blue-300 border-stone-950 border-y "></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
+  <div class ="space-name text-xs mt-4">Pennsylvania Railroad</div>
+  <div class ="propertyprice">200</div>
   </div>
-  <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 h-[8vh] border-l-2 " >
-  <div class ="card-top bg-blue-300 border-stone-950 border-y "></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
+  <div class ="space  card-top border-x-[#DF2C87] border-r-[2vw] h-[8vh] border-l-2 " >
+
+  <div class ="space-name text-xs mt-4">Virginia Avenue</div>
+  <div class ="propertyprice">160</div>
+  </div>
+  <div class ="space card-top border-x-[#DF2C87] border-r-[2vw] h-[8vh] border-l-2 " >
+
+  <div class ="space-name text-xs mt-4">States Avenue </div>
+  <div class ="propertyprice">140</div>
   </div>
 
   <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 h-[8vh] border-l-2" >
-  <div class ="card-top bg-blue-300 border-stone-950 border-y "></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
+  <div class ="space-name text-xs mt-4">Electric Company</div>
+  <div class ="propertyprice">150</div>
   </div>
-  <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 h-[8vh] border-l-2" >
-  <div class ="card-top bg-blue-300 border-stone-950 border-y "></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
+  <div class ="space border-x-[#DF2C87] border-r-[2vw] h-[8vh] border-l-2" >
+  <div class ="card-top bg-[#DF2C87] border-stone-950 border-y "></div>
+  <div class ="space-name text-xs mt-4">St. Charles Place</div>
+  <div class ="propertyprice">140</div>
   </div>
 
 
@@ -193,69 +186,57 @@ export default {
 
 
 
-i
-
-
-
-
-
-
-
 
   <div id ="right-column" class ="grid grid-rows-12 column-start-[-1] absolute right-[0] top-[5.5vw] w-[5.5vw] row-start-11  ">
-  <div class ="space bg-[#9DD2B4] border-x-orange-500  border-r-[2vw] h-[8vh] border-l-2" >
-  <div class ="card-top bg-yellow-500 border-stone-950 border-y  border-l-2 "></div>
-  <div class ="space-name text-xs mt-4">test Place</div>
+  <div class ="space bg-[#9DD2B4] border-x-green-700  border-l-[2vw] h-[8vh] " >
+  <div class ="space-name text-xs mt-4">Pacific Avenue</div>
+  <div class ="propertyprice">300</div>
   </div>
 
   
+  <div class ="space bg-[#9DD2B4] border-x-green-700  border-l-[2vw] h-[8vh] " >
+  <div class ="space-name text-xs mt-4">North Carolina Avenue</div>
+  <div class ="propertyprice">300</div>
+  </div>
+
   <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 h-[8vh]  border-l-2" >
-  <div class ="card-top bg-blue-300 border-stone-950 border-y "></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
+
+  <div class ="space-name text-xs mt-4">Community Chest</div>
+
   </div>
-  <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 h-[8vh]  border-l-2" >
-  <div class ="card-top bg-blue-300 border-stone-950 border-y "></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
-  </div>
-  <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 h-[8vh] border-l-2 " >
-  <div class ="card-top bg-blue-300 border-stone-950 border-y "></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
-  </div>
-  <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 h-[8vh] border-l-2" >
-  <div class ="card-top bg-blue-300 border-stone-950 border-y "></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
-  </div>
-  <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 h-[8vh] border-l-2" >
-  <div class ="card-top bg-blue-300 border-stone-950 border-y "></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
-  </div>
-  <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 h-[8vh] border-l-2 " >
-  <div class ="card-top bg-blue-300 border-stone-950 border-y "></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
+
+  <div class ="space bg-[#9DD2B4]  border-x-green-700  border-l-[2vw] h-[8vh]  " >
+  <div class ="space-name text-xs mt-4">Pennsylvania Avenue</div>
+  <div class ="propertyprice">320</div>
   </div>
 
   <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 h-[8vh] border-l-2" >
-  <div class ="card-top bg-blue-300 border-stone-950 border-y "></div>
+  <div class ="space-name text-xs mt-4">Short Line</div>
+  <div class ="propertyprice">200</div>
+  </div>
+
+  <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 h-[8vh] border-l-2" >
+  <div class ="space-name text-xs mt-4">Chance</div>
+  </div>
+
+  <div class ="space bg-[#9DD2B4] border-r-2   border-x-blue-500  border-l-[2vw] h-[8vh] " >
   <div class ="space-name text-xs mt-4">Park Place</div>
+  <div class ="propertyprice">350</div>
+  </div>
+
+  <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 h-[8vh] border-l-2" >
+  <div class ="space-name text-xs mt-4">Luxury Tax</div>
   <div class ="propertyprice"></div>
   </div>
-  <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 h-[8vh] border-l-2" >
-  <div class ="card-top bg-blue-300 border-stone-950 border-y "></div>
-  <div class ="space-name text-xs mt-4">Park Place</div>
-  <div class ="propertyprice"></div>
+  
+  <div class ="space bg-[#9DD2B4]  border-x-blue-500  border-l-[2vw] h-[8vh] ">
+  <div class ="space-name text-xs mt-4">BoardWalk</div>
+  <div class ="propertyprice">400</div>
   </div>
 
 
 </div>
-
 </div>
-
 
 
 

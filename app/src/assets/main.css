@@ -3,7 +3,12 @@
 @tailwind utilities;
 
 @layer base {
-    .space {
+    
+  html { 
+    background-color: #6F74F6; 
+  }
+  
+   .space {
       @apply  text-center ; 
     }
     .propertyprice {
@@ -11,6 +16,10 @@
     }
     .boardicon { 
       @apply w-[50%] h-[40%] ml-[25%] mt-3; 
+    }
+
+    .test {
+      @apply text-blue-500 text-4xl;
     }
 
 }
