@@ -8,6 +8,9 @@ module.exports = {
         '11': 'repeat(16, minmax(0, 1fr))',
       },
     },
+    fontFamily: { 
+      'sans': 'Monopoly', 
+    },
     container: {
       center: true,
       padding: '2rem',

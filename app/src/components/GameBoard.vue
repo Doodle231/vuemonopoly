@@ -1,22 +1,53 @@
 <script >
 import PlayerHistory from './PlayerHistory.vue';
+
+
+
 export default { 
   name: 'GameBoard',
   components: {
   PlayerHistory, 
-  }
+
+  }, 
+  data(){
+    return {
+      diceRolled:false 
+    }
+  },
+  methods: { 
+    rollDice(){
+      this.diceRolled = true;   
+      
+      return console.log(Math.floor(Math.random() * 12) +  1)
+    }
+    
+  },
+ 
+  props: 
+    [
+      'PlayerHistory',
+    ],
+  
 }
 </script>
 
 <template>
-  
+
   <div id = "gameboard" class ="grid grid-cols-11 grid-rows-11  mt-4 relative w-[100vw] md:w-[60vw] md:ml-10
   md:mt-10 h-[90vh] bg-[#D9D9D9]  ">
 
   <div id = "logo" class ="absolute z-99 text-[10vw] top-[15%] left-[10%] text-rose-800">Monopoly </div>
-  <PlayerHistory/>
+
   
-    <div id ="top-row" class ="grid grid-cols-11 col-start-1  col-end-12 relative  row-span-2  ">
+  
+  
+  <div v-if="diceRolled" class =" w-[120px]  ">
+<img src ="../assets/rollanimation.gif">
+<PlayerHistory playerHistory = "hello there "  />
+  </div>
+    
+  <button v-on:click ="rollDice">Roll</button>
+  <div id ="top-row" class ="grid grid-cols-11 col-start-1  col-end-12 relative  row-span-2  ">
   <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950  border-l-2  " >
   <div class ="space-name text-xs mt-4">Free Parking</div>
   </div>
