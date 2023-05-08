@@ -23,11 +23,7 @@ export default {
     
   },
  
-  props: 
-    [
-      'PlayerHistory',
-    ],
-  
+ 
 }
 </script>
 
@@ -209,6 +205,7 @@ export default {
   <div class ="card-top bg-yellow-900 border-stone-950 border-y h-1/4"></div>
   <div class ="space-name text-xs mt-4">Mediterrenean</div>
   <div class ="propertyprice">60</div>
+  <div id = "space1"></div>
   </div>
   <div class ="space bg-[#9DD2B4] border-r-2  border-stone-950 " >
   <div class ="card-top bg-blue-300 border-y h-1/4 border-stone-950"></div>
