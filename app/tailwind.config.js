@@ -15,6 +15,9 @@ module.exports = {
       center: true,
       padding: '2rem',
     },
+    blueitem:{
+      color: "#F7F4CA ", 
+    }
   },
   variants: {
     extend: {},

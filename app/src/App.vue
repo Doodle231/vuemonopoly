@@ -153,7 +153,7 @@ import RollButton from "./components/RollDice.vue"
  <h1>{{ CPUPlayer2.name }}</h1>
  <h1>{{ CPUPlayer3.name }}</h1>
  <GameBoard/>
-  <PropertyCards rent = "1400" rent1house ="24"/>
+  
   <div id = "uicontainer" class ="w-[30vw] bg-[#dae6ba] absolute right-20 h-[90vh] top-10 pt-10">
  <PlayerUI 
  playerName ="fred" 
