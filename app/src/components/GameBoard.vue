@@ -1,5 +1,6 @@
 <script >
 import  {spacesArray, bottomRow, leftColumn, rightColumn, topRow}  from "../composables/spaces.js"
+import {switchPlayer} from "../composables/players"
 
 export default { 
   name: 'GameBoard',
@@ -9,13 +10,7 @@ export default {
 
 
   setup(){
-    
-    
-    
-
- 
-
-
+  
      function getItemClass(index) {
       if (index === 9 || index === 7 )  {
         return 'bg-red-950';
@@ -41,7 +36,14 @@ export default {
       }
     
     }
+    
  
+    function RollDice(){
+   
+      switchPlayer()
+
+      return (Math.floor(Math.random() * 12) +  1)
+    }
 
 
      
@@ -51,22 +53,22 @@ export default {
       topRow, 
       bottomRow, 
       leftColumn, 
-      rightColumn }
+      rightColumn, 
+    RollDice,
+  }
 
     },
-
- 
- 
-
  
 }
+
+
+
 </script>
 
 <template>
 
   <div id = "gameboard"  class ="grid grid-cols-11 grid-rows-11  mt-4 relative w-[100vw] md:w-[60vw] md:ml-10
   md:mt-10 h-[90vh] bg-[#D9D9D9]  ">
-
 
 
 
@@ -108,7 +110,7 @@ export default {
       <h1 class ='mt-9'>{{ space.id }}</h1>
     </div>
 </div>
-
+<button v-on:click= RollDice() id ="rolldicebutton" class ="w-24 h-24 bg-green-500">Roll Dice</button>
 </div>
 
   <div id = "logo" class ="absolute z-99 text-[10vw] top-[15%] left-[10%] text-rose-800">Monopoly </div>
