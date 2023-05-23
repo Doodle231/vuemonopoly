@@ -56,7 +56,6 @@ const Players = (name, cash, ) => {
 
      function switchPlayer (){
 
-      console.log(player1)
      
       if (activePlayer === player1 ){
         activePlayer = CPUPlayer
@@ -66,7 +65,7 @@ const Players = (name, cash, ) => {
        }
       
        if (activePlayer === CPUPlayer) { 
-        console.log("running")
+        
         activePlayer = CPUPlayer2
        
         return  
