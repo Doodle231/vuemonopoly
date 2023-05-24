@@ -67,6 +67,8 @@
       band0, atlantic, ventur, waterworks, marvinGardens  ,jail, pacific, northCarolina,communitychest,  pennsylvania, shortLine, chance, parkPlace, 
       luxuryTax, boardWalk]
 
+ 
+
 
       let bottomRow = spacesArray.slice(0,11).reverse()
      let leftColumn = spacesArray.slice(11,20).reverse()
@@ -76,7 +78,8 @@
 
       for (let i = 0; i < spacesArray.length; i++) {
       spacesArray[i].id = i 
-
+      spacesArray[2].id = 2
+      spacesArray[7].id = 7
     }
   
 export {spacesArray, bottomRow, leftColumn, topRow, rightColumn}

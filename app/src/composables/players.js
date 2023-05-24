@@ -8,11 +8,11 @@ const Players = (name, cash, ) => {
       cash:cash, 
       railroads:0,
       utilities:0, 
-      location: [], 
+      location: 0, 
       propertyowned: [],
       updatedlocation:0,
       icon:null, 
-      dice:0,
+      diceRolled:0,
       turnsTaken:0, 
       hotelsOwned:0, 
       housesOwned:0, 
@@ -74,6 +74,13 @@ const Players = (name, cash, ) => {
       
        if (activePlayer === CPUPlayer2 ){
         activePlayer = CPUPlayer3
+        
+        return  
+
+       }
+
+       if (activePlayer === CPUPlayer3 ){
+        activePlayer = player1
         
         return  
 
