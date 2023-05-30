@@ -1,29 +1,64 @@
 
 
 <script>
-import { ref, computed } from 'vue';
+import { ref, computed , reactive} from 'vue';
 import GameBoard from "../src/components/GameBoard.vue"
 import PlayerUI from "./components/PlayerUI.vue";
-import { player1, CPUPlayer, CPUPlayer2, CPUPlayer3 } from "./composables/players";
+import { player1, CPUPlayer, CPUPlayer2, CPUPlayer3, activePlayer, switchPlayer} from "./composables/players";
+import PlayerHistory from './components/PlayerHistory.vue';
 
 export default {
   components: {
     GameBoard,
     PlayerUI,
+    PlayerHistory, 
     
 
   },
+
+
+  
   setup() {
+    
     const highlightIndex = ref(0);
+    
+    const currentPlayer = ref('')
+
+
+
+    const diceRolled = ref('');
+
+    function rollDice(){
+      
+     
+  
+      switchPlayer()
+
+
+      diceRolled.value =  Math.floor(Math.random() * 12)
+
+
+     currentPlayer.value = activePlayer.name
+      
+    }
+    
     const players = computed(() => [player1, CPUPlayer, CPUPlayer2, CPUPlayer3]);
      highlightIndex.value = 0
-    return {
+    
+ 
+
+     return {
       highlightIndex,
       players,
       player1, 
       CPUPlayer, 
       CPUPlayer2, 
-      CPUPlayer3
+      CPUPlayer3,
+      activePlayer, 
+      rollDice, 
+      diceRolled, 
+      currentPlayer
+     
     };
   },
 };
@@ -31,10 +66,13 @@ export default {
 
 <template>
 
-  <GameBoard/>
-
+<GameBoard :diceRolled="diceRolled" />
+  <PlayerHistory :activePlayer = "currentPlayer"/>
   <div id="uicontainer" class="w-[30vw] bg-[#dae6ba] absolute right-20 h-[90vh] top-10 pt-10">
     <PlayerUI v-for="(player, index) in players" :key="index" :highlightName="highlightIndex === index" />
-    <RollButton />
+    
   </div>
+  <button @click="rollDice" id="rolldicebutton" class="w-24 h-24 bg-green-500 absolute top-12 left-12">RollDice</button>
+
+
 </template>

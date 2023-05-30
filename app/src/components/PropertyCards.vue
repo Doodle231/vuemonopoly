@@ -1,5 +1,7 @@
 <script>
+import { activePlayer } from "../composables/players";
 import { spacesArray } from "../composables/spaces";
+
 
 export default {
   name: 'PropertyCards',
@@ -12,12 +14,18 @@ export default {
     'renthotel',
     'housecost',
     'hotelscost',
+    'isCardActive'
   ],
 
-  setup() {
-    let currentLocation = 11;
 
+ 
+
+  setup(props) {
+    let currentLocation = activePlayer.updatedlocation
+
+   
     function getPropertyCardColor() {
+
       if (currentLocation === 9 || currentLocation === 7) {
         return 'bg-red-950';
       } else if (currentLocation === 4 || currentLocation === 2 || currentLocation === 1) {
@@ -29,13 +37,15 @@ export default {
       }
     }
 
-    return { spacesArray, currentLocation, getPropertyCardColor };
+
+
+    return { spacesArray, currentLocation, getPropertyCardColor};
   },
 };
 </script>
 
 <template>
-  <div class="propertycard-modal w-[30vw] h-[70vh] top-[20vh] left-[25%] bg-slate-100 absolute z-[999] text-4xl">
+  <div v-if = "isCardActive" class="propertycard-modal w-[30vw] h-[70vh] top-[20vh] left-[25%] bg-slate-100 absolute z-[999] text-4xl">
     <div :class="getPropertyCardColor()" class="card-top w-[80%] h-[15%] ml-[10%] mt-12 border-black border-4">
       <div class="card-title text-center pt-4">
         <h2>Property Deed</h2>
@@ -44,6 +54,7 @@ export default {
     </div>
 
     <div class="card-body mt-16 ml-16">
+      <div>Active card is {{ activeCard }}</div>
       <div class="rent">Rent {{ spacesArray[currentLocation].rent }}</div>
       <div class="rent-1house">Rent with 1 house {{ spacesArray[currentLocation].house1rent }}</div>
       <div class="rent-2house">Rent with 2 houses {{ spacesArray[currentLocation].house2rent }}</div>
