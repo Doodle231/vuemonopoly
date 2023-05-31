@@ -37,10 +37,10 @@
     </div>
 
    
-    
+    <template v-if = "isCardActive"> <PropertyCards :isCardActive = "isCardActive" :cardIndex = "activeCardIndex" /></template>
  
   </div>
-  <PropertyCards :isCardActive = "isCardActive"/>
+ 
 
   <div id="logo" class="absolute z-99 text-[10vw] top-[15%] left-[10%] text-rose-800">Monopoly</div>
 </template>
@@ -70,11 +70,12 @@ export default {
 
     const isCardActive = ref(false)
     
+    const activeCardIndex = ref(null)
     
     
     
     const incrementPosition = () => {
-     
+   
       if (position.value < props.diceRolled) {
         position.value++;
       }
@@ -82,18 +83,22 @@ export default {
 
     let intervalId = null;
     const startAutoIncrement = () => {
-      intervalId = setInterval(incrementPosition, 600);
+      intervalId = setInterval(incrementPosition, 200);
     };
     const stopAutoIncrement = () => {
       clearInterval(intervalId);
     };
 
+
+   
     watch(position, (newValue) => {
       if (newValue >= props.diceRolled) {
-        activePlayer.location = props.diceRolled
+        activePlayer.location += props.diceRolled
+       activeCardIndex.value += activePlayer.location
+     
        isCardActive.value = true; 
-        console.log("movement stopped")
         stopAutoIncrement();
+       
       }
     });
 
@@ -142,7 +147,10 @@ export default {
       rightColumn,
       position,
       getImageSrc,
-      isCardActive,
+      activeCardIndex, 
+      isCardActive, 
+     
+      
  
       
     };
