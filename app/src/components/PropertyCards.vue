@@ -2,7 +2,7 @@
 import {onUpdated, ref} from "vue"
 import { activePlayer, player1 } from "../composables/players";
 import { spacesArray } from "../composables/spaces";
-
+import Auction  from "./Auction.vue"
 export default {
   name: 'PropertyCards',
   props: [
@@ -15,9 +15,14 @@ export default {
     'housecost',
     'hotelscost',
     'isCardActive',
-    'cardIndex'
+    'cardIndex',
+    
   
   ],
+
+  components:{ 
+    Auction
+  },
 
 
  
@@ -38,11 +43,14 @@ let houseCost =  spacesArray[currentLocation]?.eachhousecost || '';
 const isModalVisible = ref(true); 
 const isNonUniqueProperty = ref(true );
 
+const auctionIsActive = ref(false)
+
+
      if(spacesArray[currentLocation].spaceType ==="unique"){
       isNonUniqueProperty.value = false 
       
      } else { 
-       isNonUniqueProperty.value === true; 
+       isNonUniqueProperty.value =true; 
      }
 
     function getPropertyCardColor() {
@@ -61,6 +69,8 @@ const isNonUniqueProperty = ref(true );
 
     function declinePurchase (){
       isModalVisible.value = false; 
+      auctionIsActive.value = true; 
+      console.log("clicked decline")
     }
 
     function uniquePropertyText (){
@@ -89,13 +99,18 @@ const isNonUniqueProperty = ref(true );
         activePlayer.cash -= price 
         spacesArray[currentLocation].owner = activePlayer.name
         isModalVisible.value = false; 
+       
+  
+        activePlayer.numberofProperties += 1  
+        activePlayer.propertyowned.push(spacesArray[currentLocation])
+        
       
       }
     }
 
     return { spacesArray, currentLocation, getPropertyCardColor, propertyName, rent, rentWithOneHouse, 
     rentWithTwoHouse, rentWithThreeHouse, rentWithFourHouse, rentWithHotel, houseCost, addPropertyToInventory,isModalVisible,
-  isNonUniqueProperty, uniquePropertyText, declinePurchase};
+  isNonUniqueProperty, uniquePropertyText, declinePurchase,auctionIsActive };
   },
 };
 </script>
@@ -129,4 +144,6 @@ const isNonUniqueProperty = ref(true );
  
   <h3>{{ uniquePropertyText() }}</h3>
 </div>
+<Auction v-if = auctionIsActive :auctionIsActive = auctionIsActive />
+
 </template>
