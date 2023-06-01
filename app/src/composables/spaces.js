@@ -60,7 +60,19 @@
      const boardWalk = SpaceObjects(400, "Board Walk", 50, 100, 200, 600, 1400, 1700, 2000,200)
 
 
-
+     communitychest.spaceType = "unique"
+     chance.spaceType = "unique"
+     jail.spaceType = "unique"
+     incometax.spaceType = "unique"
+     freeParking.spaceType ="unique"
+     justVisiting.spaceType="unique"
+     go.spaceType ="unique"
+     readingRailRoad.spaceType ="railroad"
+     band0.spaceType = "railroad"
+     pennRR.spaceType = "railroad"
+     shortLine.spaceType ="railroad"
+     luxuryTax.spaceType ="unique"
+     
    let spacesArray = [go, mediterennan, communitychest, balticavenue, incometax, readingRailRoad, 
       orientalAvenue, chance, vermont, connecticut, justVisiting, stcharlesPlace, electricCompany, statesavenue, virginia, 
       pennRR, stJamesPlace, communitychest, tenessee, newYork, freeParking, kentucky, chance, indiana, illinois, 

@@ -1,5 +1,6 @@
 <script>
-
+import {onUpdated, ref} from "vue"
+import { activePlayer, player1 } from "../composables/players";
 import { spacesArray } from "../composables/spaces";
 
 export default {
@@ -24,7 +25,7 @@ export default {
   setup(props) {
    
 let currentLocation = props.cardIndex
-
+let price = spacesArray[currentLocation]?.price || '';
 let propertyName = spacesArray[currentLocation]?.name || '';
 let rent = spacesArray[currentLocation]?.rent  || '';
 let rentWithOneHouse = spacesArray[currentLocation]?.house1rent || '';
@@ -34,7 +35,16 @@ let rentWithFourHouse = spacesArray[currentLocation]?.house4rent || '';
 let rentWithHotel = spacesArray[currentLocation]?.hotelrent|| '';
 let houseCost =  spacesArray[currentLocation]?.eachhousecost || '';
 
-   
+const isModalVisible = ref(true); 
+const isNonUniqueProperty = ref(true );
+
+     if(spacesArray[currentLocation].spaceType ==="unique"){
+      isNonUniqueProperty.value = false 
+      
+     } else { 
+       isNonUniqueProperty.value === true; 
+     }
+
     function getPropertyCardColor() {
 
      let cardIndex = props.cardIndex
@@ -48,17 +58,50 @@ let houseCost =  spacesArray[currentLocation]?.eachhousecost || '';
         return '';
       }
     }
-  
 
+    function declinePurchase (){
+      isModalVisible.value = false; 
+    }
+
+    function uniquePropertyText (){
+      let landedOn = spacesArray[currentLocation]
+       console.log("running")
+      if ( landedOn.name === "go"){
+        return " you landed on go. Here is 200 bucks! "
+      }
+
+      if (landedOn.name === "Community Chest"){
+        return " You have laned on Community Chest! Here is your card..."
+      }
+
+      if (landedOn.name === "Just Visiting"){
+        return " You have landed on Just Visiting. Relax, you are not in jail... Yet"
+      }
+    }
+
+   
+
+    function addPropertyToInventory(){
+ 
+      if (activePlayer.cash < price){
+        alert("Sorry, but you don't have enough cash to buy this property")
+      } else { 
+        activePlayer.cash -= price 
+        spacesArray[currentLocation].owner = activePlayer.name
+        isModalVisible.value = false; 
+      
+      }
+    }
 
     return { spacesArray, currentLocation, getPropertyCardColor, propertyName, rent, rentWithOneHouse, 
-    rentWithTwoHouse, rentWithThreeHouse, rentWithFourHouse, rentWithHotel, houseCost};
+    rentWithTwoHouse, rentWithThreeHouse, rentWithFourHouse, rentWithHotel, houseCost, addPropertyToInventory,isModalVisible,
+  isNonUniqueProperty, uniquePropertyText, declinePurchase};
   },
 };
 </script>
 
 <template>
-  <div v-if = "isCardActive" class="propertycard-modal w-[30vw] h-[70vh] top-[20vh] left-[25%] bg-slate-100 absolute z-[999] text-4xl">
+  <div v-if = "isCardActive && isModalVisible && isNonUniqueProperty" id ="buymodal " class="propertycard-modal w-[30vw] h-[70vh] top-[20vh] left-[25%] bg-slate-100 absolute z-[999] text-4xl">
     <div :class="getPropertyCardColor()" class="card-top w-[80%] h-[15%] ml-[10%] mt-12 border-black border-4">
       <div class="card-title text-center pt-4">
         <h2>{{propertyName}}</h2>
@@ -77,8 +120,13 @@ let houseCost =  spacesArray[currentLocation]?.eachhousecost || '';
       <div class="house-cost">Houses Cost {{ houseCost }}</div>
     </div>
 
-    <button id ="buyproperty" class ="w-24 h-12 absolute bottom-[-2.5%] left-[-5%] text-6xl" ><img src="../assets/checkmark.png" >Buy</button>
-    <button id ="decline">Decline</button>
+    <button @click="addPropertyToInventory" id ="buyproperty" class ="w-24 h-12 absolute bottom-[-2.5%] left-[-5%] text-6xl" ><img src="../assets/checkmark.png" >Buy</button>
+    <button @click="declinePurchase" id ="decline" class =" w-24 h-12 " >Decline</button>
   </div>
+</div>
+
+<div v-if="isCardActive && isModalVisible && !isNonUniqueProperty" id="uniqueModal" class="propertycard-modal w-[30vw] h-[70vh] top-[20vh] left-[25%] bg-slate-100 absolute z-[999] text-4xl">
+ 
+  <h3>{{ uniquePropertyText() }}</h3>
 </div>
 </template>
