@@ -45,6 +45,7 @@ const CPUPlayer3 = reactive(Players('Lynn ', 1500));
 
 let activePlayer = reactive(player1)
 
+
 function switchPlayer() {
 
   if (activePlayer === player1) {

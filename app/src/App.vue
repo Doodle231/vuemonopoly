@@ -13,26 +13,33 @@ export default {
     PlayerUI,
     PlayerHistory, 
     
-
   },
 
 
   
   setup() {
     
-    
+   
     const currentPlayer = ref('')
+
 
     const diceRolled = ref('');
 
+  
+ 
+    
+
+ 
     function rollDice(){
       
-     
+    
   
       diceRolled.value =  Math.floor(Math.random() * 12)
 
 
      currentPlayer.value = activePlayer.name
+
+
       
     }
     
@@ -50,6 +57,8 @@ export default {
       rollDice, 
       diceRolled, 
       currentPlayer, 
+     
+    
     
      
     };
@@ -60,7 +69,7 @@ export default {
 <template>
 
 <GameBoard :diceRolled="diceRolled" />
-  <PlayerHistory :activePlayer = "currentPlayer"/>
+  <PlayerHistory :activePlayer = "currentPlayer " />
   <div id="uicontainer" class="w-[30vw] bg-[#dae6ba] absolute right-20 h-[90vh] top-10 pt-10">
    
     <PlayerUI :playerName = player1.name 
@@ -74,6 +83,8 @@ export default {
     <PlayerUI :playerName = CPUPlayer3.name :playerCash = CPUPlayer3.cash />
   </div>
   <button @click="rollDice" id="rolldicebutton" class="w-24 h-24 bg-green-500 absolute top-12 left-12">RollDice</button>
+  
 
+ 
 
 </template>
