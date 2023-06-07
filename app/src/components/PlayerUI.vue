@@ -1,5 +1,4 @@
 <template>
-  <button @click="doSomething">Click me</button>
   <div :class="{ 'bg-blue-200 ': highlightName }" class="player-container w-[90%] h-[20%] rounded-[40px] ml-10 mb-10 relative ">
     <h1 class="text-4xl pt-6 pl-16 font-bold">{{ playerName }}</h1>
     <h2 class="player-cash text-[#2F5517] text-3xl">Cash: ${{ playerCash }}</h2>
@@ -29,7 +28,7 @@ export default {
 
   setup(props) {
     const doSomething = () => {
-      console.log(activePlayer.name);
+      console.log(activePlayer);
     };
 
 

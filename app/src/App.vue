@@ -25,6 +25,10 @@ export default {
 
     const diceRolled = ref('');
 
+    function newIndex(){
+  
+     highlightIndex.value ++; 
+    }
   
  
     
@@ -37,15 +41,15 @@ export default {
       diceRolled.value =  Math.floor(Math.random() * 12)
 
 
-     currentPlayer.value = activePlayer.name
+    
 
-
+     
       
     }
     
-
-    
- 
+    const highlightIndex = ref(0)
+    const players = computed(() => [player1, CPUPlayer, CPUPlayer2, CPUPlayer3]);
+     highlightIndex.value = 0
 
      return {
   
@@ -57,6 +61,9 @@ export default {
       rollDice, 
       diceRolled, 
       currentPlayer, 
+      players, 
+      highlightIndex, 
+      newIndex, 
      
     
     
@@ -68,19 +75,11 @@ export default {
 
 <template>
 
-<GameBoard :diceRolled="diceRolled" />
+<GameBoard :diceRolled="diceRolled" @updatedIndex="newIndex"/>
   <PlayerHistory :activePlayer = "currentPlayer " />
   <div id="uicontainer" class="w-[30vw] bg-[#dae6ba] absolute right-20 h-[90vh] top-10 pt-10">
-   
-    <PlayerUI :playerName = player1.name 
-    :playerCash = player1.cash 
-    :propertyOwned= player1.numberofProperties 
-   
-    />
-    
-    <PlayerUI :playerName = CPUPlayer.name :playerCash = CPUPlayer.cash />
-    <PlayerUI :playerName = CPUPlayer2.name :playerCash = CPUPlayer2.cash />
-    <PlayerUI :playerName = CPUPlayer3.name :playerCash = CPUPlayer3.cash />
+  
+    <PlayerUI v-for="(player, index) in players" :key="index" :highlightName="highlightIndex === index" />
   </div>
   <button @click="rollDice" id="rolldicebutton" class="w-24 h-24 bg-green-500 absolute top-12 left-12">RollDice</button>
   

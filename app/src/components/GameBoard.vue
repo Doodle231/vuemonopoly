@@ -6,6 +6,8 @@
         <div :class="getItemClass(index)" class="pt-4 pb-4">
           <img v-if="space.id === player1Position" src ="../assets/boot.png" alt="Image">
           <img v-if="space.id === cpuPlayer1Position" src ="../assets/car.png" alt="Image">
+          <img v-if="space.id === cpuPlayer2Position" src ="../assets/hat.png" alt="Image">
+          <img v-if="space.id === cpuPlayer3Position" src ="../assets/dog.png" alt="Image">
         </div>
         <div class="space-name text-xs mt-4">{{ space.name }}</div>
         <h1 class="mt-9">{{ space.id }}</h1>
@@ -58,8 +60,8 @@ import { spacesArray, bottomRow, leftColumn, rightColumn, topRow } from '../comp
 import MainModal from "./MainModal.vue";
 
 
-import { activePlayer, player1 , CPUPlayer, switchPlayer} from '../composables/players';
-
+import { activePlayer, player1 , CPUPlayer, switchPlayer, CPUPlayer2, CPUPlayer3} from '../composables/players';
+import {CPULandingCheck} from "../composables/cpuplayerslogic"
 
 export default {
   components: {
@@ -72,49 +74,122 @@ export default {
      'cpuPlayer1DiceRolled',
      'cpuPlayer2DiceRolled',
      'cpuPlayer3DiceRolled',
-     'informationModalIsActive'
-   
+     'informationModalIsActive',
+     'highlightIndex'
     
   ],
   
+  emits: ['updatedIndex'],
+  setup(props,context) {
 
-  setup(props) {
-
+    console.log(props)
 
     function myAction (){
+     /*
       startAutoIncrement()
       switchPlayer()
-      activePlayer.diceRolled = 3
+      activePlayer.diceRolled = Math.floor(Math.random() * 12)
       activePlayer.location += activePlayer.diceRolled
      console.log(activePlayer)
+     */ 
+    
      CPULand()
-     return 
+     
     }
   
+  
+   
     const isCardActive = ref(false)
     
     const activeCardIndex = ref(null)
     
-
+    
     const player1Position = ref(0)
     const cpuPlayer1Position =ref(0)
     const cpuPlayer2Position = ref(0)
     const cpuPlayer3Position = ref(0)
    
     function CPULand (){
-      console.log(spacesArray[activePlayer.location].name)
+     
+       console.log(context)
+      switchPlayer()
+      spacesArray[activePlayer.location].owner = activePlayer
+      activePlayer.cash -= spacesArray[activePlayer.location].price
+      activePlayer.numberofProperties += 1 
+      activePlayer.propertyowned.push(spacesArray[activePlayer.location])
+     
+   
+      startAutoIncrement()
+
+      activePlayer.diceRolled = Math.floor(Math.random() * 12)
+      activePlayer.location += activePlayer.diceRolled
+
+    
+
+
+
+   
+
+      switchPlayer()
+
+      
+     //CPULandingCheck(startAutoIncrement)
+
+    }
+
+    function initCPUTurn (){
+        
+      
+      CPUPlayer2.diceRolled = Math.floor(Math.random() * 12)
+      CPUPlayer2.location += CPUPlayer2.diceRolled
+     
+
+
+     if  (activePlayer === CPUPlayer2)
+     {setTimeout(() => {
+    
+      CPUPlayer3.diceRolled = Math.floor(Math.random() * 12)
+      CPUPlayer3.location += CPUPlayer3.diceRolled
+  }, 3800);
+}
+
+  
+    startAutoIncrement()
+   
+
     }
    
     const incrementPosition = () => {
-      
+   
+    
+
       if (player1Position.value < props.diceRolled) {
-        player1Position.value++;
-      }
+player1Position.value++;
+
+}
      
       if (cpuPlayer1Position.value < CPUPlayer.diceRolled) {
-        cpuPlayer1Position.value ++;
-      }
+  setTimeout(() => {
+    cpuPlayer1Position.value++;
+  }, 800);
+}
+      
+      if (cpuPlayer2Position.value < CPUPlayer2.diceRolled) {
+      
+        setTimeout(() => {
+    cpuPlayer2Position.value++;
+    context.emit('updatedIndex')
+  }, 1800);
+  
+}
 
+      if (cpuPlayer3Position.value < CPUPlayer3.diceRolled) {
+     
+        setTimeout(() => {
+          context.emit('updatedIndex')
+    cpuPlayer3Position.value++;
+  }, 1800);
+}
 
     };
 
@@ -135,20 +210,40 @@ export default {
      
        isCardActive.value = true; 
         stopAutoIncrement();
-       
+      
       }
     });
 
 
     watch(cpuPlayer1Position, (newValue) => {
-      console.log("firing")
       if (newValue >= CPUPlayer.diceRolled) {
         activePlayer.location += CPUPlayer.diceRolled
        activeCardIndex.value += activePlayer.location
-     
       
+        initCPUTurn()
         stopAutoIncrement();
-      
+       
+      }
+    });
+
+    watch(cpuPlayer2Position, (newValue) => {
+     
+      if (newValue >= CPUPlayer2.location) {
+        activePlayer.location += CPUPlayer2.diceRolled
+       activeCardIndex.value += activePlayer.location
+       initCPUTurn()
+        stopAutoIncrement();
+       
+      }
+    });
+
+    watch(cpuPlayer3Position, (newValue) => {
+
+      if (newValue >= CPUPlayer3.location) {
+        activePlayer.location += CPUPlayer3.diceRolled
+       activeCardIndex.value += activePlayer.location
+        initCPUTurn()
+        stopAutoIncrement();
        
       }
     });
@@ -190,6 +285,8 @@ export default {
       
     };
 
+      
+
 
 
     return {
@@ -209,8 +306,8 @@ export default {
       cpuPlayer3Position,
       myAction, 
       CPULand, 
-     
-      
+     CPULandingCheck, 
+     initCPUTurn, 
  
       
     };

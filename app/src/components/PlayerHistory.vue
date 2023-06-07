@@ -17,6 +17,7 @@ export default {
 
     watch(activePlayer, (newValue) => {
       name.value = newValue.name;
+      console.log(name.value)
     });
 
     return {
