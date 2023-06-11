@@ -84,8 +84,8 @@
 
       let bottomRow = spacesArray.slice(0,11).reverse()
      let leftColumn = spacesArray.slice(11,20).reverse()
-     let topRow = spacesArray.slice(20,30)
-     let rightColumn = spacesArray.slice(30,40)
+     let topRow = spacesArray.slice(20,31)
+     let rightColumn = spacesArray.slice(31,40)
 
 
       for (let i = 0; i < spacesArray.length; i++) {

@@ -1,43 +1,56 @@
 <template>
  
-  <div id="gameboard"  class="grid grid-cols-11 grid-rows-11 mt-4 relative w-[100vw] md:w-[60vw] md:ml-10 md:mt-10 h-[90vh] bg-[#D9D9D9]">
-    <div id="bottom-row" class="grid grid-cols-11 col-start-1 row-start-[-1] col-end-12 relative h-[9vh]">
-      <div v-for="(space, index) in bottomRow" :key="space.id" class="border-2 border-slate-600">
-        <div :class="getItemClass(index)" class="pt-4 pb-4">
-          <img v-if="space.id === player1Position" src ="../assets/boot.png" alt="Image">
-          <img v-if="space.id === cpuPlayer1Position" src ="../assets/car.png" alt="Image">
-          <img v-if="space.id === cpuPlayer2Position" src ="../assets/hat.png" alt="Image">
-          <img v-if="space.id === cpuPlayer3Position" src ="../assets/dog.png" alt="Image">
+  <div id="gameboard"  class="grid grid-cols-11 grid-rows-11  relative w-[100vw] md:w-[60vw] md:ml-10 md:mt-2 h-[90vh] bg-[#D9D9D9] ">
+    <div id="bottom-row" class="grid grid-cols-11 col-start-1 row-start-[-1] col-end-12 relative h-[9vh]  ">
+      
+      <div v-for="(space, index) in bottomRow" :key="space.id" :class="getItemClass(index)" class="pt-4 pb-4 h-4 " >
+  
+        
+        <div class="space-name text-xs mt-4 h-24 bg-[#D9D9D9] border border-black-1 border-t-0 text-center">
+          <h1 class = "mt-8">{{ space.name }}</h1>
+         <h1 class = "mt-8"> {{ space.price }}</h1>
         </div>
-        <div class="space-name text-xs mt-4">{{ space.name }}</div>
-        <h1 class="mt-9">{{ space.id }}</h1>
+        
+        
+        
+        <img v-if="space.id === player1Position" src ="../assets/boot.png" alt="Image" class ="w-1/2">
+        <img v-if="space.id === cpuPlayer1Position" src ="../assets/car.png" alt="Image" class ="w-1/2">
+        <img v-if="space.id === cpuPlayer2Position" src ="../assets/hat.png" alt="Image" class ="w-1/2">
+        <img v-if="space.id === cpuPlayer3Position" src ="../assets/dog.png" alt="Image" class ="w-1/2">
+  
       </div>
+     
     </div>
 
-    <div id="left-column" class="grid grid-rows-12 row-start-3 absolute w-[5.5vw]">
-      <div v-for="(space, index) in leftColumn" :key="space.id" class="border-2 border-slate-600">
+    <div id="left-column" class="grid grid-rows-12 row-start-3 absolute w-[5.5vw] ">
+      <div v-for="(space, index) in leftColumn" :key="space.id" class=" border border-black-1 h-[7.5vh]">
         <div :class="getLeftColumnClass(index)" class="pt-2 pb-2">
           <img v-if="space.id === player1Position" src ="../assets/boot.png" alt="Image">
           
         </div>
         <div class="space-name text-xs mt-4">{{ space.name }}</div>
-        <h1 class="mt-9">{{ space.id }}</h1>
+       
       </div>
     </div>
 
-    <div id="top-row" class="grid grid-cols-11 col-start-2 col-end-12 relative row-span-2">
-      <div v-for="(space, index) in topRow" :key="space.id">
-        <div class="space-name text-xs mt-4">{{ space.name }}</div>
-        <h1 class="mt-9">{{ space.id }}</h1>
+    <div id="top-row" class="grid grid-cols-11 col-start-2 col-end-12 relative row-span-2  border border-black-1 h-[9vh]">
+      <div v-for="(space, index) in topRow" :key="space.id" :class="getTopColumnClass(index)" class="pt-4 pb-4 h-4">
+        <div class="space-name text-xs mt-4 h-24 bg-[#D9D9D9] border border-black-1 border-t-0 text-center">{{ space.name }}</div>
+     
       </div>
     </div>
 
-    <div id="right-column" class="grid grid-rows-12 column-start-[-1] absolute right-[0] top-[5.5vw] w-[5.5vw] row-start-11">
-      <div v-for="(space, index) in rightColumn" :key="space.id">
+    <div id="right-column" class="grid grid-rows-12 column-start-[-1] absolute right-[0] top-[5.5vw] w-[5.5vw] row-start-11 ">
+      <div v-for="(space, index) in rightColumn" :key="space.id"  class=" border border-black-1 h-[7.5vh]">
+        <div :class="getRightColumnClass(index)" class="pt-2 pb-2">
+          <img v-if="space.id === player1Position" src ="../assets/boot.png" alt="Image">
+          </div>
+        
         <div class="space-name text-xs mt-4">{{ space.name }}</div>
-        <h1 class="mt-9">{{ space.id }}</h1>
+     
       </div>
     </div>
+   
 
     <template v-if="isCardActive"> <MainModal :isCardActive="isCardActive" 
       :cardIndex="activeCardIndex" 
@@ -82,8 +95,8 @@ export default {
   emits: ['updatedIndex'],
   setup(props,context) {
 
-    console.log(props)
-
+  
+     console.log(player1.name)
     function myAction (){
      /*
       startAutoIncrement()
@@ -256,9 +269,9 @@ player1Position.value++;
 
     const getItemClass = (index) => {
       if (index === 9 || index === 7) {
-        return 'bg-red-950';
+        return 'bg-red-950 ';
       } else if (index === 4 || index === 2 || index === 1) {
-        return 'bg-blue-200';
+        return 'bg-blue-200 ';
       } else if (index === 11 || index === 13 || index === 14) {
         return 'bg-fuchsia-500';
       } else {
@@ -278,7 +291,25 @@ player1Position.value++;
       }
     };
 
- 
+    const getTopColumnClass = (index) => {
+      if (index === 1 || index === 3 || index === 4) {
+        return 'bg-red-600';
+      } else if (index === 6 || index === 7 || index === 9) {
+        return 'bg-yellow-300';
+      } else if (index === 11 || index === 13 || index === 14) {
+        return 'bg-pink-900';
+      } else {
+        return '';
+      }
+    };
+
+    const getRightColumnClass = (index) => {
+      if (index === 0 || index === 1 || index === 3) {
+        return 'bg-green-600';
+      } else if (index === 6 || index === 8 ) {
+        return 'bg-blue-800';
+      }
+    };
 
     const getImageSrc = () => {
       return `../assets/boot.png`
@@ -308,6 +339,8 @@ player1Position.value++;
       CPULand, 
      CPULandingCheck, 
      initCPUTurn, 
+     getTopColumnClass, 
+     getRightColumnClass, 
  
       
     };

@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'bg-blue-200 ': highlightName }" class="player-container w-[90%] h-[20%] rounded-[40px] ml-10 mb-10 relative ">
+  <div :class="{ 'bg-blue-200': highlightName }" class="player-container w-[90%] h-[20%] rounded-[40px] ml-10 mb-10 relative">
     <h1 class="text-4xl pt-6 pl-16 font-bold">{{ playerName }}</h1>
     <h2 class="player-cash text-[#2F5517] text-3xl">Cash: ${{ playerCash }}</h2>
     <img src="../assets/property.jpg" class="w-[40px] h-[40px] rounded-[40px]">
@@ -22,19 +22,16 @@ export default {
     'propertyOwned',
     'hotelsOwned',
     'housesOwned',
-    'activeplayer',
+    'activePlayer',
     'highlightName'
   ],
 
   setup(props) {
-    const doSomething = () => {
-      console.log(activePlayer);
-    };
-
+    const currentPlayer = activePlayer;
+    console.log(currentPlayer);
 
     return {
-      doSomething,
-      ...props,
+      currentPlayer
     };
   },
 };

@@ -63,7 +63,7 @@ export default {
 
    
     
-    
+    console.log(player1.name)
 
     function addPropertyToInventory() {
       if (activePlayer.cash < price) {
@@ -119,6 +119,8 @@ export default {
       <button @click="declinePurchase" id="decline" class="w-24 h-12">Decline</button>
     </div>
   </div>
+
+  
 
   <div v-if="isCardActive && isModalVisible && !isNonUniqueProperty" id="uniqueModal" class="propertycard-modal w-[30vw] h-[70vh] top-[20vh] left-[25%] bg-slate-100 absolute z-[999] text-4xl">
     <h3>{{ uniquePropertyText() }}</h3>
