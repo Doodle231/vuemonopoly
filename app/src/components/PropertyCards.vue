@@ -1,8 +1,8 @@
 
 <template>
    
-    <div  class="card-top w-[80%] h-[15%] ml-[10%] mt-12 border-black border-4">
-      <div :class="getPropertyCardColor()" class="card-title text-center pt-4">
+    <div  class="card-top w-[50%] h-[15%]  border-black border-4 ">
+      <div :class="getPropertyCardColor()" class="card-title text-center pt-4 h-24">
         <h2>{{propertyName}}</h2>
         <h1 class="text-6xl mt-5 font-bold"></h1>
       </div>
@@ -17,17 +17,14 @@
         <div class="house-cost">Houses Cost {{ houseCost }}</div>
       </div>
   
-      <button @click="addPropertyToInventory" id="buyproperty" class="w-24 h-12 absolute bottom-[-2.5%] left-[-5%] text-6xl">
-        <img src="../assets/checkmark.png" />Buy
-      </button>
-      <button @click="declinePurchase" id="decline" class="w-24 h-12">Decline</button>
+     
     </div>
   </template>
   
   <script>
-  import { onUpdated, ref } from "vue";
+
   import { spacesArray } from "../composables/spaces";
-  import { switchPlayer } from "../composables/players";
+
   
   export default {
     props: ["cardIndex"],

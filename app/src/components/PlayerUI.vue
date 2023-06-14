@@ -3,7 +3,7 @@
     <h1 class="text-4xl pt-6 pl-16 font-bold">{{ playerName }}</h1>
     <h2 class="player-cash text-[#2F5517] text-3xl">Cash: ${{ playerCash }}</h2>
     <img src="../assets/property.jpg" class="w-[40px] h-[40px] rounded-[40px]">
-    <div class="property-owned">Total Property: {{ propertyOwned }}</div>
+    <div class="property-owned">Total Property: {{ numberofProperties }}</div>
     <div class="hotels-owned ml-[70%]">Total Hotels: {{ hotelsOwned }}</div>
     <img src="../assets/hotel.jpg" class="w-[40px] h-[40px] rounded-[40px] ml-[75%]">
     <div class="houses-owned ml-[50%]">Total Houses: {{ housesOwned }}</div>
@@ -19,7 +19,7 @@ export default {
   props: [
     'playerName',
     'playerCash',
-    'propertyOwned',
+    'numberofProperties',
     'hotelsOwned',
     'housesOwned',
     'activePlayer',
@@ -28,7 +28,7 @@ export default {
 
   setup(props) {
     const currentPlayer = activePlayer;
-    console.log(currentPlayer);
+
 
     return {
       currentPlayer
