@@ -24,7 +24,7 @@
   <script>
 
   import { spacesArray } from "../composables/spaces";
-
+  import { player1 } from "../composables/players";
   
   export default {
     props: ["cardIndex"],
@@ -32,7 +32,7 @@
     setup(props) {
         
       function getPropertyCardColor() {
-        let cardIndex = props.cardIndex;
+        let cardIndex = player1.location
         if (cardIndex === 1 || cardIndex === 3) {
           return "bg-orange-900";
         } else if (cardIndex === 6 || cardIndex === 8 || cardIndex === 9) {
@@ -44,7 +44,7 @@
         }
       }
   
-      let currentLocation = props.cardIndex;
+      let currentLocation = player1.location
     
       let price = spacesArray[currentLocation].price 
       let propertyName = spacesArray[currentLocation].name 
@@ -60,7 +60,7 @@
   
     
       function declinePurchase() {
-        // Add your logic here
+        //
       }
   
       return {

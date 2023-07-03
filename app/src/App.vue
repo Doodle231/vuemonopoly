@@ -4,45 +4,79 @@ import GameBoard from "../src/components/GameBoard.vue"
 import PlayerUI from "./components/PlayerUI.vue";
 import { player1, CPUPlayer, CPUPlayer2, CPUPlayer3, activePlayer, switchPlayer } from "./composables/players";
 import PlayerHistory from './components/PlayerHistory.vue';
-
+import MainModal from './components/MainModal.vue';
 export default {
   components: {
     GameBoard,
     PlayerUI,
     PlayerHistory,
+    MainModal, 
   },
 
   setup() {
-    const Player1diceRolled = ref('');
-    const player1StatusMessage = ref(' this is a status message ')
+    
+    const isModalActive = ref(false)
+    
+    
+    const Player1diceRolled = ref();
+   
     function newIndex() {
       highlightIndex.value++;
-    }
 
+    }
+   
     function rollDice() {
      // diceRolled.value = Math.floor(Math.random() * 12);
-     Player1diceRolled.value = 9
+     console.log("clicked")
+     player1.diceRolled =  Math.floor(Math.random() * 12);
+     player1.location += player1.diceRolled
+    
+     
     }
 
     const testPlayer = ref(player1)
      
     const highlightIndex = ref(0);
 
-    function switchActivePlayer() {
-      
-      switchPlayer();
+  
+
+    function openModal() {
+      isModalActive.value = true
      
+     
+    }
+
+    function switchActivePlayer() {
+      console.log("switch active player")
+      switchPlayer();
+     // isModalActive.value = false; 
       testPlayer.value = activePlayer
      
 
       testPlayer.value = activePlayer
 
       highlightIndex.value +=1 ; 
-      console.log(highlightIndex.value)
+     
+
+      if (highlightIndex.value === 4){
+        highlightIndex.value = 0
+      }
    
     }
 
-  
+    function CPULand() {
+     isModalActive.value = false 
+      CPUPlayer.location += 9
+      console.log("CPU LAND")
+/*
+      CPUPlayer.diceRolled = 8
+      cpuPlayer1Position.value = 8
+      
+      */ 
+    }
+
+
+
 
     const players = computed(() => [
       { name: player1.name, cash: player1.cash, propertyOwned: player1.numberofProperties },
@@ -64,7 +98,9 @@ export default {
       switchActivePlayer,
       activePlayer, 
       testPlayer, 
-      player1StatusMessage, 
+      isModalActive, 
+      CPULand, 
+      openModal, 
       
     };
   },
@@ -72,13 +108,16 @@ export default {
 </script>
 
 <template>
-  <GameBoard :diceRolled="Player1diceRolled" @updatedIndex="newIndex" @updateActive="switchActivePlayer"/>
+  <GameBoard :diceRolled="Player1diceRolled" 
+  @updatedIndex="newIndex" 
+  @updateActive="switchActivePlayer"
+  @openmodal="openModal"
+ />
   
   <PlayerHistory 
   :activePlayer="testPlayer"
-  :Player1StatusMessage="player1StatusMessage" 
-  
-  class="mb-12"         />
+
+  class="mb-12" />
   
   <div id="uicontainer" class="w-[30vw] bg-[#dae6ba] absolute right-20 h-[90vh] top-10 pt-10">
     <PlayerUI
@@ -94,4 +133,17 @@ export default {
   <button @click="rollDice" id="rolldicebutton" class="w-24 h-24 bg-green-500 absolute left-[20%] bottom-[20%]">
     Roll Dice
   </button>
+
+
+
+    
+    <MainModal v-if="isModalActive"
+    
+    
+
+    
+    @player1turnfinished="CPULand" />
+  
+
+
 </template>

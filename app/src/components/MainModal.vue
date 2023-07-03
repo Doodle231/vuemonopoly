@@ -7,26 +7,28 @@ import PropertyCards from './PropertyCards.vue'
 
 export default {
   name: 'MainModal',
-  props: ['isCardActive', 'cardIndex', 'cpuPlayer1Position'],
-  emits: ['test'],
+  props: ['isMobalActive', 'cardIndex', 'cpuPlayer1Position'],
+  emits: ['player1turnfinished'],
   components: {
     Auction,
     PropertyCards
   },
 
   setup(props, context) {
-    const currentLocation = props.cardIndex
-    const cardIndex = props.cardIndex
-    const currentSpace = spacesArray[currentLocation].name
-    const isModalVisible = ref(true)
-    const isNonUniqueProperty = ref(true)
-    const price = spacesArray[currentLocation].price
-    const auctionIsActive = ref(false)
 
-    if (spacesArray[currentLocation].spaceType === 'unique') {
-      isNonUniqueProperty.value = false
+    const cardIndex = props.cardIndex
+    const currentSpace = spacesArray[player1.location].name
+    const isModalVisible = props.isModalActive
+    const isSpecialSpace = ref(false)
+    const price = spacesArray[player1.location].price
+    const auctionIsActive = ref(false)
+    const isCardActive = ref(true)
+
+    if (spacesArray[player1.location].spaceType === 'unique') {
+      isSpecialSpace.value = false
+      
     } else {
-      isNonUniqueProperty.value = true
+      isSpecialSpace.value = true
     }
 
     function declinePurchase() {
@@ -35,7 +37,7 @@ export default {
     }
 
     function uniquePropertyText() {
-      let landedOn = spacesArray[currentLocation]
+      let landedOn = spacesArray[player1.location]
 
       if (landedOn.name === 'go') {
         return 'You landed on go. Here is 200 bucks!'
@@ -58,16 +60,15 @@ export default {
     
 
     function addPropertyToInventory() {
-      if (activePlayer.cash < price) {
+      if (player1.cash < price) {
         alert("Sorry, but you don't have enough cash to buy this property")
       } else {
-        activePlayer.cash -= price
-        spacesArray[currentLocation].owner = activePlayer.name
-        isModalVisible.value = false
-
+        player1.cash -= price
+        spacesArray[player1.location].owner = activePlayer.name
+        
         player1.numberofProperties += 1
-        activePlayer.propertyowned.push(spacesArray[currentLocation])
-        context.emit('test', 'hello there')
+        activePlayer.propertyowned.push(spacesArray[player1.location])
+        context.emit('player1turnfinished', )
   
       
         
@@ -77,21 +78,22 @@ export default {
     return {
       isModalVisible,
       addPropertyToInventory,
-      isNonUniqueProperty,
+      isSpecialSpace,
       uniquePropertyText,
       declinePurchase,
       auctionIsActive,
       closeModal,
       cardIndex,
       currentSpace,
-      price
+      price, 
+      isCardActive, 
     }
   }
 }
 </script>
 
 <template>
-  <div v-if="isCardActive && isModalVisible && isNonUniqueProperty" id="buymodal" class="propertycard-modal w-[60vw] h-[70vh] top-[20vh] left-[25%] 
+  <div  id="buymodal" class="propertycard-modal w-[60vw] h-[70vh] top-[20vh] left-[25%] 
       bg-slate-100 absolute z-[999] text-4xl p-14">
     <div>
       <h1>
@@ -114,7 +116,7 @@ export default {
 
   </div>
 
-  <div v-if="isCardActive && isModalVisible && !isNonUniqueProperty" id="uniqueModal"
+  <div v-if="isCardActive && isModalVisible && !isSpecialSpace" id="uniqueModal"
     class="propertycard-modal w-[30vw] h-[70vh] top-[20vh] left-[25%] bg-slate-100 absolute z-[999] text-4xl">
     <h3>{{ uniquePropertyText() }}</h3>
     <button id="okaybutton" @click="closeModal">Ok</button>

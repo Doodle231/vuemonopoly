@@ -1,7 +1,8 @@
 <template>
   <div id="historycontainer" class="absolute w-[40%] h-[40%] left-[10%] bottom-[15vh] bg-yellow-200">
     It is {{activePlayer.name}} 's turn
-    {{ Player1StatusMessage }}
+    {{ activePlayer.name }} has rolled a {{ activePlayer.diceRolled }}
+    
   </div>
 </template>
 
@@ -12,7 +13,7 @@ import { activePlayer } from '../composables/players';
 export default {
   name: 'PlayerHistory',
   props: ['activePlayer',
-         'Player1StatusMessage'
+       
 
 ],
 
@@ -21,13 +22,13 @@ export default {
   setup(props) {
   
 
-    let Player1Message = props.Player1StatusMessage
+
     watch(activePlayer, (newValue) => {
     
     });
 
     return {
-      Player1Message
+    
     };
   },
 };
