@@ -25,10 +25,11 @@ export default {
     const isCardActive = ref(true)
 
     if (spacesArray[player1.location].spaceType === 'unique') {
-      isSpecialSpace.value = false
+      isSpecialSpace.value = true
+      console.log(isSpecialSpace.value)
       
     } else {
-      isSpecialSpace.value = true
+      isSpecialSpace.value = false 
     }
 
     function declinePurchase() {
@@ -38,7 +39,7 @@ export default {
 
     function uniquePropertyText() {
       let landedOn = spacesArray[player1.location]
-
+     console.log(landedOn.name)
       if (landedOn.name === 'go') {
         return 'You landed on go. Here is 200 bucks!'
       }
@@ -50,11 +51,14 @@ export default {
       if (landedOn.name === 'Just Visiting') {
         return 'You have landed on Just Visiting. Relax, you are not in jail... Yet'
       }
+      
     }
 
     function closeModal() {
-      isModalVisible.value = false
-      switchPlayer()
+     isSpecialSpace.value = false; 
+     isCardActive.value = false; 
+     
+     context.emit('player1turnfinished', )
     }
 
     
@@ -69,6 +73,8 @@ export default {
         player1.numberofProperties += 1
         activePlayer.propertyowned.push(spacesArray[player1.location])
         context.emit('player1turnfinished', )
+        player1.statusMessage = player1.name + " has purchased " + spacesArray[player1.location].name
+        console.log(player1.location)
   
       
         
@@ -93,7 +99,7 @@ export default {
 </script>
 
 <template>
-  <div  id="buymodal" class="propertycard-modal w-[60vw] h-[70vh] top-[20vh] left-[25%] 
+  <div v-if="!isSpecialSpace &&isCardActive" id="buymodal" class="propertycard-modal w-[60vw] h-[70vh] top-[20vh] left-[25%] 
       bg-slate-100 absolute z-[999] text-4xl p-14">
     <div>
       <h1>
@@ -116,7 +122,7 @@ export default {
 
   </div>
 
-  <div v-if="isCardActive && isModalVisible && !isSpecialSpace" id="uniqueModal"
+  <div v-if="isSpecialSpace" id="uniqueModal"
     class="propertycard-modal w-[30vw] h-[70vh] top-[20vh] left-[25%] bg-slate-100 absolute z-[999] text-4xl">
     <h3>{{ uniquePropertyText() }}</h3>
     <button id="okaybutton" @click="closeModal">Ok</button>

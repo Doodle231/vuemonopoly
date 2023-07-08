@@ -32,14 +32,30 @@
     setup(props) {
         
       function getPropertyCardColor() {
+
         let cardIndex = player1.location
+        console.log("card index is " + cardIndex)
         if (cardIndex === 1 || cardIndex === 3) {
           return "bg-orange-900";
         } else if (cardIndex === 6 || cardIndex === 8 || cardIndex === 9) {
           return "bg-blue-200";
         } else if (cardIndex === 11 || cardIndex === 13 || cardIndex === 14) {
           return "bg-fuchsia-500";
-        } else {
+        } else if (cardIndex === 16 || cardIndex === 18 || cardIndex === 19) {
+          return 'bg-orange-500';
+        } 
+        else if (cardIndex === 21 || cardIndex === 23 || cardIndex === 24) {
+          return "bg-red-600";
+        } 
+        else if (cardIndex === 26 || cardIndex === 27 || cardIndex === 29) {
+          return "bg-yellow-600";
+        }     else if (cardIndex === 31 || cardIndex === 32 || cardIndex === 34) {
+          return "bg-green-600";
+        }  else if (cardIndex === 37 || cardIndex === 39) {
+          return "bg-blue-600";
+        } 
+        
+        else {
           return "";
         }
       }

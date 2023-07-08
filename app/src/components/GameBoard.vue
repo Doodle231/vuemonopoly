@@ -28,9 +28,9 @@
     <div id="top-row" class="grid grid-cols-11 col-start-1 col-end-12 relative row-span-2 border border-black-1 h-[9vh]">
       <div v-for="(space, index) in topRow" :key="space.id" :class="getTopColumnClass(index)" class="pt-4 pb-4 h-4">
         <img v-if="space.id === player1Location" src="../assets/boot.png" alt="Image" />
-        <img v-if="space.id === cpuPlayer1Position" src="../assets/car.png" alt="Image" class="w-1/2 absolute top-10" />
-        <img v-if="space.id === cpuPlayer2Position" src="../assets/hat.png" alt="Image" class="w-1/2 absolute top-24" />
-        <img v-if="space.id === cpuPlayer3Position" src="../assets/dog.png" alt="Image" class="w-1/2 absolute top-14" />
+        <img v-if="space.id === cpuPlayer1Position" src="../assets/car.png" alt="Image" class="w-[60px] " />
+        <img v-if="space.id === cpuPlayer2Position" src="../assets/hat.png" alt="Image" class="w-[60px]   " />
+        <img v-if="space.id === cpuPlayer3Position" src="../assets/dog.png" alt="Image" class="w-[60px] " />
         <div class="space-name text-xs mt-4 h-24 bg-[#D9D9D9] border border-black-1 border-t-0 text-center">
           {{ space.name }}
         </div>
@@ -41,6 +41,9 @@
       <div v-for="(space, index) in rightColumn" :key="space.id" class="border border-black-1 h-[7.5vh]">
         <div :class="getRightColumnClass(index)" class="pt-2 pb-2">
           <img v-if="space.id === player1Position" src="../assets/boot.png" alt="Image" />
+          <img v-if="space.id === cpuPlayer1Position" src="../assets/car.png" alt="Image" class="w-1/2 absolute top-10" />
+          <img v-if="space.id === cpuPlayer2Position" src="../assets/hat.png" alt="Image" class="w-1/2 absolute top-24" />
+          <img v-if="space.id === cpuPlayer3Position" src="../assets/dog.png" alt="Image" class="w-1/2 absolute top-14" />
         </div>
         <div class="space-name text-xs mt-4">{{ space.name }}</div>
       </div>
@@ -56,14 +59,12 @@
 <script>
 import { ref, watch, computed} from 'vue'
 import { spacesArray, bottomRow, leftColumn, rightColumn, topRow } from '../composables/spaces.js'
-import MainModal from './MainModal.vue'
+
 
 import { activePlayer, player1, CPUPlayer, CPUPlayer2, CPUPlayer3 } from '../composables/players'
 
 export default {
-  components: {
-    MainModal
-  },
+
   name: 'GameBoard',
   props: [
     'diceRolled',
@@ -105,7 +106,11 @@ export default {
     if (current === newValue) {
       clearInterval(interval)
     
-     context.emit('updateActive')
+      if(spacesArray[player1.location].spaceType!= "unique"){
+        console.log("updating")
+       
+      }
+    
      context.emit('openmodal')
     
     }
@@ -114,7 +119,6 @@ export default {
 
 
 
-  
    
     watch(CPUplayer1Location, (newValue, oldValue) => {
       const increment = newValue - oldValue
@@ -127,9 +131,11 @@ export default {
 
     if (current === newValue) {
       clearInterval(interval)
+     
       context.emit("updateActive")
       CPUPlayer2.location  +=8
-     
+      CPUPlayer2.diceRolled = 8
+    
     }
   }, 200)
 })
@@ -147,7 +153,8 @@ watch(CPUPlayer2Location, (newValue, oldValue) => {
     if (current === newValue) {
       clearInterval(interval)
       context.emit("updateActive")
-      CPUPlayer3.location = 9
+      CPUPlayer3.location += 9
+      CPUPlayer3.diceRolled = 9
     
     }
   }, 200)

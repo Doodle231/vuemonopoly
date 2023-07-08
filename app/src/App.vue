@@ -27,14 +27,13 @@ export default {
    
     function rollDice() {
      // diceRolled.value = Math.floor(Math.random() * 12);
-     console.log("clicked")
-     player1.diceRolled =  Math.floor(Math.random() * 12);
+    
+     player1.diceRolled =   Math.floor(Math.random() * 12) +  1 
      player1.location += player1.diceRolled
     
      
     }
 
-    const testPlayer = ref(player1)
      
     const highlightIndex = ref(0);
 
@@ -49,11 +48,12 @@ export default {
     function switchActivePlayer() {
       console.log("switch active player")
       switchPlayer();
+      console.log(activePlayer.name)
      // isModalActive.value = false; 
-      testPlayer.value = activePlayer
+   
      
 
-      testPlayer.value = activePlayer
+     
 
       highlightIndex.value +=1 ; 
      
@@ -67,8 +67,11 @@ export default {
     function CPULand() {
      isModalActive.value = false 
       CPUPlayer.location += 9
+      CPUPlayer.diceRolled = 9
       console.log("CPU LAND")
-/*
+      highlightIndex.value +=1 ; 
+   
+/*    
       CPUPlayer.diceRolled = 8
       cpuPlayer1Position.value = 8
       
@@ -97,10 +100,10 @@ export default {
       newIndex,
       switchActivePlayer,
       activePlayer, 
-      testPlayer, 
       isModalActive, 
       CPULand, 
       openModal, 
+    
       
     };
   },
@@ -115,7 +118,7 @@ export default {
  />
   
   <PlayerHistory 
-  :activePlayer="testPlayer"
+ 
 
   class="mb-12" />
   

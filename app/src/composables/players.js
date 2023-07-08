@@ -15,6 +15,7 @@ const Players = (name, cash) => {
     turnsTaken: 0,
     hotelsOwned: 0,
     housesOwned: 0,
+    statusMessage:'null', 
     cardCounts: {
       brownCards: 0,
       lightBlueCards: 0,
