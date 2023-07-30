@@ -33,7 +33,7 @@ export default {
     }
 
     function declinePurchase() {
-      isModalVisible.value = false
+   
       auctionIsActive.value = true
     }
 
@@ -99,8 +99,8 @@ export default {
 </script>
 
 <template>
-  <div v-if="!isSpecialSpace &&isCardActive" id="buymodal" class="propertycard-modal w-[60vw] h-[70vh] top-[20vh] left-[25%] 
-      bg-slate-100 absolute z-[999] text-4xl p-14">
+  <div v-if="!isSpecialSpace &&isCardActive" id="buymodal" class="propertycard-modal w-[100vw] h-[100vh]  
+  bg-gray-800 absolute z-[998] text-4xl  top-0 bg-opacity-60 text-white p-[90px]">
     <div>
       <h1>
         You have landed on {{ currentSpace }} . .It is currently up for Sale. If you decline, it
@@ -109,13 +109,13 @@ export default {
       <PropertyCards :cardIndex="cardIndex" />
 
       <button @click="addPropertyToInventory" id="buyproperty"
-        class="w-24 h-12 absolute bottom-[-2.5%] left-[-5%] text-6xl">
-        <img src="../assets/checkmark.png" />
+        class="w-24 h-12  text-6xl absolute left-[20%]">
+       
         Buy
       </button>
       <button @click="declinePurchase" id="decline" 
-      class="w-24 h-12">
-      X
+      class="w-24 h-12 text-6xl absolute right-[20%]">
+      
       Decline
     </button>
     </div>
@@ -128,4 +128,5 @@ export default {
     <button id="okaybutton" @click="closeModal">Ok</button>
   </div>
   <Auction v-if="auctionIsActive" :auctionIsActive="auctionIsActive" />
+  
 </template>

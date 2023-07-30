@@ -1,13 +1,13 @@
 
 <template>
    
-    <div  class="card-top w-[50%] h-[15%]  border-black border-4 ">
+    <div  class="card-top w-[40%] h-[40%] ml-[30%] border-black border-4 text-black mt-12">
       <div :class="getPropertyCardColor()" class="card-title text-center pt-4 h-24">
         <h2>{{propertyName}}</h2>
-        <h1 class="text-6xl mt-5 font-bold"></h1>
+        <h1 class="text-[6xl] mt-5 font-bold"></h1>
       </div>
   
-      <div class="card-body mt-16 ml-16">
+      <div class="card-body p-[90px] bg-white">
         <div v-if="rent" class="rent">Rent {{ rent }}</div>
         <div class="rent-1house">Rent with 1 house {{ rentWithOneHouse }}</div>
         <div class="rent-2house">Rent with 2 houses {{ rentWithTwoHouse }}</div>
@@ -27,6 +27,7 @@
   import { player1 } from "../composables/players";
   
   export default {
+    name:'PropertyCards', 
     props: ["cardIndex"],
   
     setup(props) {
