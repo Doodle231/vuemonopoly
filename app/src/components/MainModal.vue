@@ -99,9 +99,10 @@ export default {
 </script>
 
 <template>
-  <div v-if="!isSpecialSpace &&isCardActive" id="buymodal" class="propertycard-modal w-[100vw] h-[100vh]  
-  bg-gray-800 absolute z-[998] text-4xl  top-0 bg-opacity-60 text-white p-[90px]">
-    <div>
+  <div v-if="!isSpecialSpace &&isCardActive" id="buymodal" class="propertycard-modal w-[100vw] h-[100vh] 
+  bg-slate-200 absolute z-[998] text-2xl  top-0 text-center  p-[90px]">
+    <div id ="cardModalWrapper" class ="bg-blue-300">
+  <div>
       <h1>
         You have landed on {{ currentSpace }} . .It is currently up for Sale. If you decline, it
         will be sent up for auction.
@@ -109,12 +110,14 @@ export default {
       <PropertyCards :cardIndex="cardIndex" />
 
       <button @click="addPropertyToInventory" id="buyproperty"
-        class="w-24 h-12  text-6xl absolute left-[20%]">
+        class="w-24 h-16  text-2xl absolute left-[35%] bottom-[5%] bg-green-500 
+        rounded-lg border-2 hover:bg-green-300">
        
         Buy
       </button>
       <button @click="declinePurchase" id="decline" 
-      class="w-24 h-12 text-6xl absolute right-[20%]">
+      class="w-24 h-16 text-2xl absolute right-[35%] bottom-[5%] bg-red-500 
+      rounded-lg border-2 hover:bg-red-300">
       
       Decline
     </button>
@@ -122,8 +125,9 @@ export default {
 
   </div>
 
+  </div>
   <div v-if="isSpecialSpace" id="uniqueModal"
-    class="propertycard-modal w-[30vw] h-[70vh] top-[20vh] left-[25%] bg-slate-100 absolute z-[999] text-4xl">
+    class="propertycard-modal w-[30vw] h-[70vh] top-[20vh] left-[25%] bg-red-400 absolute z-[999] text-4xl">
     <h3>{{ uniquePropertyText() }}</h3>
     <button id="okaybutton" @click="closeModal">Ok</button>
   </div>

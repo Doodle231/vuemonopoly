@@ -10,7 +10,9 @@
 @layer base {
     
   html { 
-    background-color: #6F74F6; 
+    background-color: #777b9d;
+    overflow: hidden;
+     
   }
   
    .space {

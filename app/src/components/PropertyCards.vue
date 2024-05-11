@@ -1,13 +1,13 @@
 
 <template>
-   
-    <div  class="card-top w-[40%] h-[40%] ml-[30%] border-black border-4 text-black mt-12">
+ 
+    <div  class="card-top  h-[20%] ml-[33%] border-black border-2 text-black mt-12 w-96">
       <div :class="getPropertyCardColor()" class="card-title text-center pt-4 h-24">
         <h2>{{propertyName}}</h2>
         <h1 class="text-[6xl] mt-5 font-bold"></h1>
       </div>
   
-      <div class="card-body p-[90px] bg-white">
+      <div class="card-body p-[20px] w-96 bg-white border-black border-r-2">
         <div v-if="rent" class="rent">Rent {{ rent }}</div>
         <div class="rent-1house">Rent with 1 house {{ rentWithOneHouse }}</div>
         <div class="rent-2house">Rent with 2 houses {{ rentWithTwoHouse }}</div>
@@ -19,6 +19,7 @@
   
      
     </div>
+
   </template>
   
   <script>

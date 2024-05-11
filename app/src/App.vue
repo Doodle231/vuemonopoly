@@ -122,7 +122,7 @@ export default {
 
   class="mb-12" />
   
-  <div id="uicontainer" class="w-[30vw] bg-[#dae6ba] absolute right-20 h-[90vh] top-10 pt-10">
+  <div id="uicontainer" class="w-[30vw] bg-[#dae6ba] absolute right-10 h-[90vh] top-10 pt-10">
     <PlayerUI
       v-for="(player, index) in players"
       :key="index"
@@ -132,14 +132,28 @@ export default {
       :propertyOwned="player.propertyOwned"
     />
   </div>
-  
-  <button @click="rollDice" id="rolldicebutton" class="w-24 h-24 bg-green-500 absolute left-[20%] bottom-[20%]">
-    Roll Dice
+  <div id ="bottomBtnWrapper" class="bg-blue-200 w-[50vw] h-16 ml-32 absolute bottom-[1%] flex justify-around rounded-lg border-2">
+    <img src="./assets/rollanimation.gif" @click="rollDice" id="rolldicebutton" class="w-24 h-12 cursor-pointer" alt="Roll Dice" />
+
+  <button @click="trade" id="rolldicebutton" class="w-24 h-12 bg-green-500  bottom-[3%] mt-2 rounded-lg border-2">
+
   </button>
 
+  <button @click="trade" id="rolldicebutton" class="w-24 h-12 bg-green-500  bottom-[3%] mt-2 rounded-lg border-2">
+    Sell Property
+  </button>
 
-
+  <button @click="trade" id="rolldicebutton" class="w-24 h-12 bg-green-500  bottom-[3%] mt-2 rounded-lg border-2">
+    Stats
+  </button>
+</div>
+  
     
+  <img src="./assets/house.png" @click="rollDice" id="rolldicebutton" class="w-12 h-12 cursor-pointer absolute top-[3%] left-[10%]" alt="Roll Dice " />
+  <img src="./assets/hotel.png" @click="rollDice" id="rolldicebutton" class="w-12 h-12 cursor-pointer absolute top-[3%] left-[15%]" alt="Roll Dice " />
+  <button @click="rollDice" id="rolldicebutton" class="w-24 h-12 bg-green-500 absolute left-[40%] top-[3%]">
+    Roll Dice
+  </button>
     <MainModal v-if="isModalActive"
     
     
