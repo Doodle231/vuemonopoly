@@ -1,5 +1,5 @@
 <template>
-  <div id="historycontainer" class="absolute w-[30%] h-[20%] left-[15%] bottom-[25vh] bg-yellow-200 overflow-auto" ref="container">
+  <div id="historycontainer" class=" absolute w-[27%] h-[23%] left-[20%] bottom-[20vh] bg-yellow-200 overflow-auto" ref="container">
     <div ref="content" class="p-4">
       <div v-for="(update, index) in updates" :key="index" class="mb-2">{{ update }}</div>
     </div>

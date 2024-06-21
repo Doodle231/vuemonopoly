@@ -26,8 +26,7 @@ export default {
 
     if (spacesArray[player1.location].spaceType === 'unique') {
       isSpecialSpace.value = true
-      console.log(isSpecialSpace.value)
-      
+     
     } else {
       isSpecialSpace.value = false 
     }
@@ -39,7 +38,7 @@ export default {
 
     function uniquePropertyText() {
       let landedOn = spacesArray[player1.location]
-     console.log(landedOn.name)
+     
       if (landedOn.name === 'go') {
         return 'You landed on go. Here is 200 bucks!'
       }
@@ -74,7 +73,7 @@ export default {
         activePlayer.propertyowned.push(spacesArray[player1.location])
         context.emit('player1turnfinished', )
         player1.statusMessage = player1.name + " has purchased " + spacesArray[player1.location].name
-        console.log(player1.location)
+        
   
       
         
@@ -99,24 +98,26 @@ export default {
 </script>
 
 <template>
-  <div v-if="!isSpecialSpace &&isCardActive" id="buymodal" class="propertycard-modal w-[100vw] h-[100vh] 
-  bg-slate-200 absolute z-[998] text-2xl  top-0 text-center  p-[90px]">
-    <div id ="cardModalWrapper" class ="bg-blue-300">
-  <div>
-      <h1>
-        You have landed on {{ currentSpace }} . .It is currently up for Sale. If you decline, it
+  <div v-if="!isSpecialSpace &&isCardActive" id="buymodal" class="propertycard-modal w-[100vw] h-[100vh]  
+  bg-teal-400 absolute z-[998] text-2xl  top-0 text-center  p-[90px]">
+    <div id ="cardModalWrapper" class ="bg-blue-100 pb-20 rounded-lg border-blue-200 border-[12px] absolute top-[5%] left-[15%] w-[70vw]">
+      <img src="../assets/monman.png" class="w-96 h-96 absolute left-16 bottom-24">
+      
+      <div>
+      <h1 class="p-8 text-sm text-center">
+        You have landed on {{ currentSpace }}. It is currently up for Sale. If you decline, it
         will be sent up for auction.
       </h1>
       <PropertyCards :cardIndex="cardIndex" />
 
       <button @click="addPropertyToInventory" id="buyproperty"
-        class="w-24 h-16  text-2xl absolute left-[35%] bottom-[5%] bg-green-500 
+        class="w-24 h-16  text-2xl absolute left-[45%] bottom-[5%] bg-green-500 
         rounded-lg border-2 hover:bg-green-300">
        
         Buy
       </button>
       <button @click="declinePurchase" id="decline" 
-      class="w-24 h-16 text-2xl absolute right-[35%] bottom-[5%] bg-red-500 
+      class="w-24 h-16 text-2xl absolute right-[5%] bottom-[5%] bg-red-500 
       rounded-lg border-2 hover:bg-red-300">
       
       Decline

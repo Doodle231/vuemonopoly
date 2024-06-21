@@ -1,7 +1,7 @@
 
 <template>
  
-    <div  class="card-top  h-[20%] ml-[33%] border-black border-2 text-black mt-12 w-96">
+    <div  class="card-top  h-[20%] ml-[50%] border-black border-2 text-black mt-4 w-96">
       <div :class="getPropertyCardColor()" class="card-title text-center pt-4 h-24">
         <h2>{{propertyName}}</h2>
         <h1 class="text-[6xl] mt-5 font-bold"></h1>
@@ -36,7 +36,7 @@
       function getPropertyCardColor() {
 
         let cardIndex = player1.location
-        console.log("card index is " + cardIndex)
+       
         if (cardIndex === 1 || cardIndex === 3) {
           return "bg-orange-900";
         } else if (cardIndex === 6 || cardIndex === 8 || cardIndex === 9) {

@@ -48,7 +48,7 @@ export default {
     function switchActivePlayer() {
       console.log("switch active player")
       switchPlayer();
-      console.log(activePlayer.name)
+      console.log(activePlayer)
      // isModalActive.value = false; 
    
      
@@ -71,6 +71,7 @@ export default {
       console.log("CPU LAND")
       highlightIndex.value +=1 ; 
    
+   console.log(player1.cardCounts)
 /*    
       CPUPlayer.diceRolled = 8
       cpuPlayer1Position.value = 8
@@ -103,7 +104,7 @@ export default {
       isModalActive, 
       CPULand, 
       openModal, 
-    
+      
       
     };
   },
@@ -111,6 +112,7 @@ export default {
 </script>
 
 <template>
+  <div class="bg-[url('/assets/city.jpg')]">
   <GameBoard :diceRolled="Player1diceRolled" 
   @updatedIndex="newIndex" 
   @updateActive="switchActivePlayer"
@@ -122,38 +124,38 @@ export default {
 
   class="mb-12" />
   
-  <div id="uicontainer" class="w-[30vw] bg-[#dae6ba] absolute right-10 h-[90vh] top-10 pt-10">
+  <div id="uicontainer" class="w-[30vw] bg-blue-400 absolute right-10 h-[90vh] 
+  top-10 pt-10 text-white  rounded-lg border-yellow-100 border-[10px]">
     <PlayerUI
       v-for="(player, index) in players"
       :key="index"
       :highlightName="highlightIndex === index"
       :playerName="player.name"
       :playerCash="player.cash"
-      :propertyOwned="player.propertyOwned"
+      :index="index"
+      :smallCardVisible="39"
+      
+      
     />
   </div>
-  <div id ="bottomBtnWrapper" class="bg-blue-200 w-[50vw] h-16 ml-32 absolute bottom-[1%] flex justify-around rounded-lg border-2">
+  <div id ="bottomBtnWrapper" class="bg-blue-200 w-[50vw] h-16 ml-32 absolute bottom-[1%] flex justify-around rounded-lg border-blue-100 border-[10px]">
     <img src="./assets/rollanimation.gif" @click="rollDice" id="rolldicebutton" class="w-24 h-12 cursor-pointer" alt="Roll Dice" />
 
-  <button @click="trade" id="rolldicebutton" class="w-24 h-12 bg-green-500  bottom-[3%] mt-2 rounded-lg border-2">
-
-  </button>
-
-  <button @click="trade" id="rolldicebutton" class="w-24 h-12 bg-green-500  bottom-[3%] mt-2 rounded-lg border-2">
-    Sell Property
-  </button>
-
-  <button @click="trade" id="rolldicebutton" class="w-24 h-12 bg-green-500  bottom-[3%] mt-2 rounded-lg border-2">
-    Stats
-  </button>
+    <img src="./assets/dollar.png" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
+    <img src="./assets/property.jpg" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
+    <img src="./assets/stats.png" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
 </div>
   
-    
-  <img src="./assets/house.png" @click="rollDice" id="rolldicebutton" class="w-12 h-12 cursor-pointer absolute top-[3%] left-[10%]" alt="Roll Dice " />
-  <img src="./assets/hotel.png" @click="rollDice" id="rolldicebutton" class="w-12 h-12 cursor-pointer absolute top-[3%] left-[15%]" alt="Roll Dice " />
-  <button @click="rollDice" id="rolldicebutton" class="w-24 h-12 bg-green-500 absolute left-[40%] top-[3%]">
-    Roll Dice
-  </button>
+    <div id ="topButtonsWrapper" class="w-[30vw] h-20  absolute top-[-1%] left-[15%]  flex justify-around items-center rounded-lg border-2 border-slate-200 bg-blue-200   ">
+  <img src="./assets/house.png" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
+  <img src="./assets/hotel.png" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
+  <img src="./assets/bank.png" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
+  <img src="./assets/dollar.png" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
+  <img src="./assets/property.jpg" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
+  <img src="./assets/stats.png" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
+</div>
+  
+
     <MainModal v-if="isModalActive"
     
     
@@ -162,5 +164,5 @@ export default {
     @player1turnfinished="CPULand" />
   
 
-
+</div>
 </template>
