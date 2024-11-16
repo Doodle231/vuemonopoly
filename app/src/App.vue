@@ -126,14 +126,14 @@ export default {
   
   <div id="uicontainer" class="w-[30vw] bg-blue-400 absolute right-10 h-[90vh] 
   top-10 pt-10 text-white  rounded-lg border-yellow-100 border-[10px]">
-    <PlayerUI
+   // <PlayerUI
       v-for="(player, index) in players"
       :key="index"
       :highlightName="highlightIndex === index"
       :playerName="player.name"
       :playerCash="player.cash"
       :index="index"
-      :smallCardVisible="39"
+      :smallCardVisible="5"
       
       
     />

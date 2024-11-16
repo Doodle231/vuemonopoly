@@ -1,5 +1,5 @@
 <template>
-  <div id="gameboard" class=" scale-x-75 scale-y-75 grid grid-cols-11 grid-rows-11 relative w-[100vw] md:w-[60vw] md:ml-10 md:mt-4 h-[90vh] bg-[#D9D9D9]">
+  <div id="gameboard" class="  grid grid-cols-11 grid-rows-11 relative w-[100vw] md:w-[60vw] md:ml-10 md:mt-24 h-[80vh] bg-[#D9D9D9]">
     <div id="logo" class="absolute z-99 text-[9vw] top-[15%] left-[20%] text-rose-800">Monopoly</div>
     
     <div id="bottom-row" class="grid grid-cols-11 col-start-1 row-start-[-1] col-end-12 relative h-[7vh]">

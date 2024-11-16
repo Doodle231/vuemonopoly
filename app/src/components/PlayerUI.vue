@@ -60,7 +60,8 @@ export default {
     onMounted(() => {
         //change the visibilty here
         let smallCardVisible = props.smallCardVisible
-        hello.value.classList.remove('hidden');
+        //hello.value.classList.remove('hidden')
+        console.log()
       })
     const currentPlayer = activePlayer;
     
@@ -68,7 +69,7 @@ export default {
     return {
       currentPlayer,
       hello, 
-      
+     
      
     };
   },
