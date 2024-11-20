@@ -4,13 +4,14 @@ import GameBoard from "../src/components/GameBoard.vue"
 import PlayerUI from "./components/PlayerUI.vue";
 import { player1, CPUPlayer, CPUPlayer2, CPUPlayer3, activePlayer, switchPlayer } from "./composables/players";
 import PlayerHistory from './components/PlayerHistory.vue';
-import MainModal from './components/MainModal.vue';
+import MainModal from './components/MainModal.vue'
 export default {
   components: {
     GameBoard,
     PlayerUI,
     PlayerHistory,
     MainModal, 
+    
   },
 
   setup() {
@@ -68,15 +69,11 @@ export default {
      isModalActive.value = false 
       CPUPlayer.location += 9
       CPUPlayer.diceRolled = 9
-      console.log("CPU LAND")
+    
       highlightIndex.value +=1 ; 
    
-   console.log(player1.cardCounts)
-/*    
-      CPUPlayer.diceRolled = 8
-      cpuPlayer1Position.value = 8
-      
-      */ 
+   
+
     }
 
 
@@ -156,12 +153,15 @@ export default {
 </div>
   
 
-    <MainModal v-if="isModalActive"
-    
-    
-
-    
-    @player1turnfinished="CPULand" />
+<MainModal v-if="isModalActive" @player1turnfinished="CPULand">
+      <AuctionResult
+        :bid="player1.bid"
+        :player2Bid="CPUPlayer.bid"
+        :player3Bid="CPUPlayer2.bid"
+        :player4Bid="CPUPlayer3.bid"
+     
+      />
+    </MainModal>
   
 
 </div>
