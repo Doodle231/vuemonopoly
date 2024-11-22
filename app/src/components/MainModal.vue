@@ -8,7 +8,7 @@ import PropertyCards from './PropertyCards.vue';
 export default {
   name: 'MainModal',
   props: ['isModalActive', 'cardIndex', 'cpuPlayer1Position'],
-  emits: ['player1turnfinished'],
+  emits: ['player1turnfinished', 'auctionfinished'],
   components: {
     Auction,
     PropertyCards,
@@ -41,6 +41,7 @@ export default {
    
     function declinePurchase() {
       auctionIsActive.value = true;
+      console.log("auction launching")
     }
 
     function uniquePropertyText() {
@@ -61,7 +62,10 @@ export default {
       auctionIsActive.value = false;
       isModalVisible.value = false;
       isCardActive.value = false;
-      console.log('Auction Finished', { auctionIsActive, isModalVisible, isCardActive });
+      console.log('Auction Finished', { auctionIsActive, isModalVisible, isCardActive })
+      context.emit('auctionfinished');
+      
+
     }
 
     function addPropertyToInventory() {
@@ -96,63 +100,57 @@ export default {
   },
 };
 </script>
-
 <template>
-  <!-- Main Buy Modal -->
-  <div
-    v-if="!isSpecialSpace && isCardActive"
-    id="buymodal"
-    class="propertycard-modal w-[100vw] h-[100vh] bg-gray-400 absolute z-[998] text-2xl top-0 text-center p-[90px]"
-  >
-    <div id="cardModalWrapper" class="bg-blue-100 pb-8 rounded-lg border-blue-200 border-[12px] absolute top-[10%] left-[15%] w-[70vw] h-[70vh]">
-      <img src="../assets/monman.png" class="w-124 h-124 absolute left-16 bottom-4" />
+ 
+    <!-- Modal for Property Purchase -->
+    <div
+      v-if="!isSpecialSpace && isCardActive && !auctionIsActive"
+      id="buymodal"
+      class="propertycard-modal w-[100vw] h-[100vh] bg-gray-400/70 absolute z-[998] text-2xl top-0 text-center p-[90px]"
+    >
+      <div
+        id="cardModalWrapper"
+        class="pb-8 rounded-lg border-[12px] absolute top-[10%] left-[15%] 
+        w-[70vw] h-[70vh] opacity-100 bg-blue-400"
+      >
+        <img src="../assets/monman.png" class="w-124 h-124 absolute left-16 bottom-4" />
 
-      <div>
-        <h1 class="p-12 text-[2rem] text-center mb-">
-          You have landed on {{ currentSpace }}. It is currently up for Sale. If you decline, it
-          will be sent up for auction.
-        </h1>
-        <h1 class="properyPrice text-[2rem] text-center ml-72">
-          Price:
-          <h1 class="text-green-400 text-2xl text-[4rem] mt-4">$ {{ price }}</h1>
-        </h1>
-        <PropertyCards :cardIndex="cardIndex" />
+        <div>
+          <h1 class="p-12 text-[2rem] text-center">
+            You have landed on {{ currentSpace }}. It is currently up for Sale. If you decline, it
+            will be sent up for auction.
+          </h1>
+          <h1 class="properyPrice text-[2rem] text-center ml-72">
+            Price:
+            <h1 class="text-green-400 text-2xl text-[4rem] mt-4">$ {{ price }}</h1>
+          </h1>
+          <PropertyCards :cardIndex="cardIndex" />
 
-        <!-- Buy Button -->
-        <button
-          @click="addPropertyToInventory"
-          id="buyproperty"
-          class="w-24 h-16 text-2xl absolute left-[45%] bottom-[5%] bg-green-500 rounded-lg border-2 hover:bg-green-300"
-        >
-          Buy
-        </button>
+          <!-- Buy Button -->
+          <button
+            @click="addPropertyToInventory"
+            id="buyproperty"
+            class="w-24 h-16 text-2xl absolute left-[45%] bottom-[5%] bg-green-500 rounded-lg border-2 hover:bg-green-300"
+          >
+            Buy
+          </button>
 
-        <!-- Decline Button -->
-        <button
-          @click="declinePurchase"
-          id="decline"
-          class="w-24 h-16 text-2xl absolute right-[5%] bottom-[5%] bg-red-500 rounded-lg border-2 hover:bg-red-300"
-        >
-          Decline
-        </button>
+          <!-- Decline Button -->
+          <button
+            @click="declinePurchase"
+            id="decline"
+            class="w-24 h-16 text-2xl absolute right-[5%] bottom-[5%] bg-red-500 rounded-lg border-2 hover:bg-red-300"
+          >
+            Decline
+          </button>
+        </div>
       </div>
     </div>
-  </div>
 
+    <!-- Auction Component -->
+    <Auction
+      v-if="auctionIsActive"
+      @auctionfinished="handleAuctionFinished"
+    />
 
-  <div
-    v-if="isSpecialSpace"
-    id="uniqueModal"
-    class="propertycard-modal w-[30vw] h-[70vh] top-[20vh] left-[25%] bg-red-400 absolute z-[999] text-4xl"
-  >
-    <h3>{{ uniquePropertyText() }}</h3>
-    <button id="okaybutton" @click="closeModal">Ok</button>
-  </div>
-
-
-  <Auction
-    v-if="auctionIsActive"
-    :auctionIsActive="auctionIsActive"
-    @auctionfinished="handleAuctionFinished"
-  />
 </template>

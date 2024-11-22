@@ -1,5 +1,5 @@
 <template>
-  <div id="historycontainer" class=" absolute w-[27%] h-[23%] left-[20%] bottom-[20vh] bg-yellow-200 overflow-auto" ref="container">
+  <div id="historycontainer" class=" absolute w-[27%] h-[23%] md:left-[20%] left-[40%] bottom-[20vh] bg-yellow-200 overflow-auto" ref="container">
     <div ref="content" class="p-4">
       <div v-for="(update, index) in updates" :key="index" class="mb-2">{{ update }}</div>
     </div>
@@ -27,6 +27,29 @@ export default {
 
 watch(() => player1.statusMessage, (newLocation, oldLocation) => {
   updates.value.push(` ${player1.statusMessage }`);
+      nextTick(() => {
+        container.value.scrollTop = content.value.clientHeight;
+      });
+});
+
+watch(() => CPUPlayer.statusMessage, (newLocation, oldLocation) => {
+  updates.value.push(` ${CPUPlayer.statusMessage }`);
+      nextTick(() => {
+        container.value.scrollTop = content.value.clientHeight;
+      });
+});
+
+
+watch(() => CPUPlayer2.statusMessage, (newLocation, oldLocation) => {
+  updates.value.push(` ${CPUPlayer2.statusMessage }`);
+      nextTick(() => {
+        container.value.scrollTop = content.value.clientHeight;
+      });
+});
+
+
+watch(() => CPUPlayer3.statusMessage, (newLocation, oldLocation) => {
+  updates.value.push(` ${CPUPlayer3.statusMessage }`);
       nextTick(() => {
         container.value.scrollTop = content.value.clientHeight;
       });

@@ -5,6 +5,7 @@ import PlayerUI from "./components/PlayerUI.vue";
 import { player1, CPUPlayer, CPUPlayer2, CPUPlayer3, activePlayer, switchPlayer } from "./composables/players";
 import PlayerHistory from './components/PlayerHistory.vue';
 import MainModal from './components/MainModal.vue'
+import { cpuLandingSpaceLogic } from './composables/cpuplayerslogic';
 export default {
   components: {
     GameBoard,
@@ -47,9 +48,10 @@ export default {
     }
 
     function switchActivePlayer() {
-      console.log("switch active player")
+     
       switchPlayer();
-      console.log(activePlayer)
+      cpuLandingSpaceLogic()
+      
      // isModalActive.value = false; 
    
      
@@ -121,8 +123,8 @@ export default {
 
   class="mb-12" />
   
-  <div id="uicontainer" class="w-[30vw] bg-blue-400 absolute right-10 h-[90vh] 
-  top-10 pt-10 text-white  rounded-lg border-yellow-100 border-[10px]">
+  <div id="uicontainer" class="md:w-[30vw] bg-blue-400 absolute md:right-10 right-0 h-[90vh]  w-28 
+  top-0 pt-10 text-white  rounded-lg border-yellow-100 border-[10px]">
    // <PlayerUI
       v-for="(player, index) in players"
       :key="index"
@@ -153,15 +155,15 @@ export default {
 </div>
   
 
-<MainModal v-if="isModalActive" @player1turnfinished="CPULand">
-      <AuctionResult
-        :bid="player1.bid"
-        :player2Bid="CPUPlayer.bid"
-        :player3Bid="CPUPlayer2.bid"
-        :player4Bid="CPUPlayer3.bid"
+<MainModal v-if="isModalActive" 
+@player1turnfinished="CPULand"
+@auctionfinished="CPULand">
+</MainModal>
+      
+      
      
-      />
-    </MainModal>
+    
+
   
 
 </div>

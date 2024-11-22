@@ -3,15 +3,20 @@
     <div id="logo" class="absolute z-99 text-[9vw] top-[15%] left-[20%] text-rose-800">Monopoly</div>
     
     <div id="bottom-row" class="grid grid-cols-11 col-start-1 row-start-[-1] col-end-12 relative h-[7vh]">
-      <div v-for="(space, index) in bottomRow" :key="space.id" :class="getItemClass(index)" class=" pb-4 h-2 relative">
+      <div v-for="(space, index) in bottomRow" 
+      :key="space.id" 
+      :class="getItemClass(index)" 
+      class=" pb-4 h-2 relative">
+        
         <img v-if="space.id === player1Position" src="../assets/boot.png" alt="Image" class="w-1/2 absolute" />
         <img v-if="space.id === cpuPlayer1Position" src="../assets/car.png" alt="Image" class="w-1/2 absolute " />
         <img v-if="space.id === cpuPlayer2Position" src="../assets/hat.png" alt="Image" class="w-1/2 absolute " />
         <img v-if="space.id === cpuPlayer3Position" src="../assets/dog.png" alt="Image" class="w-1/2 absolute " />
-        <div class="space-name text-xs mt-4 h-16 bg-[#D9D9D9] border border-black-1 border-t-0 text-center">
-          <h1 class="">{{ space.name }}</h1>
-          <h1 class="mt-4">{{ space.price }}</h1>
-        </div>
+       
+        <div :class="['space-name text-xs mt-4 h-16 border border-black-1 border-t-0 text-center', space.owner !== 'The bank' ? 'bg-red-300' : 'bg-[#D9D9D9]']">
+  <h1 class="">{{ space.name }}</h1>
+  <h1 class="mt-4">{{ space.price }}</h1>
+</div>
       </div>
     </div>
 

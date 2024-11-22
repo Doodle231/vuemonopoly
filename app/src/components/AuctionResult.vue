@@ -7,11 +7,11 @@
         :key="index"
         class="bg-blue-200 w-[25%] h-[26rem]"
       >
-        Player {{ index + 1 }}'s bid ${{ bid }}
+        Player {{ index + 1 }}'s bid: ${{ bid }}
       </p>
     </div>
     <p v-if="winningBid !== null">
-      The winning bid is: ${{ winningBid }} by Player {{ winningPlayer }}
+      The winning bid is: ${{ winningBid }} by Player {{ winningPlayer.name }}
     </p>
     <button
       id="NEXTSCREENBTN"
@@ -28,63 +28,23 @@ export default {
   name: 'AuctionResult',
   emits: ['auctionfinished'],
   props: {
-    bid: {
-      type: Number,
-      required: true,
-    },
-    player2Bid: {
-      type: Number,
-      required: true,
-    },
-    player3Bid: {
-      type: Number,
-      required: true,
-    },
-    player4Bid: {
-      type: Number,
-      required: true,
-    },
+    bid: { type: Number, required: true },
+    player2Bid: { type: Number, required: true },
+    player3Bid: { type: Number, required: true },
+    player4Bid: { type: Number, required: true },
+    winningPlayer: { type: Object, required: true },
+    winningBid: { type: Number, required: true },
   },
   data() {
     return {
-      displayedBids: [],
-      winningBid: null,
-      winningPlayer: null,
+      displayedBids: [this.bid, this.player2Bid, this.player3Bid, this.player4Bid],
     };
   },
-  mounted() {
-    this.showBidWithDelay();
-  },
+ 
   methods: {
     closeAuction() {
       this.$emit('auctionfinished');
-      console.log('Auction finished and moving to the next turn');
-    },
-    showBidWithDelay() {
-      setTimeout(() => {
-        this.displayedBids.push(this.bid);
-        setTimeout(() => {
-          this.displayedBids.push(this.player2Bid);
-          setTimeout(() => {
-            this.displayedBids.push(this.player3Bid);
-            setTimeout(() => {
-              this.displayedBids.push(this.player4Bid);
-              this.showWinningBid();
-            }, 600);
-          }, 600);
-        }, 600);
-      }, 600);
-    },
-    showWinningBid() {
-      setTimeout(() => {
-        this.calculateWinningBid();
-      }, 800);
-    },
-    calculateWinningBid() {
-      const bids = [this.bid, this.player2Bid, this.player3Bid, this.player4Bid];
-      const maxBid = Math.max(...bids);
-      this.winningBid = maxBid;
-      this.winningPlayer = bids.indexOf(maxBid) + 1;
+      console.log(this.displayedBids);
     },
   },
 };
