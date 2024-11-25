@@ -6,17 +6,26 @@ import { player1, CPUPlayer, CPUPlayer2, CPUPlayer3, activePlayer, switchPlayer 
 import PlayerHistory from './components/PlayerHistory.vue';
 import MainModal from './components/MainModal.vue'
 import { cpuLandingSpaceLogic } from './composables/cpuplayerslogic';
+
+import Trade from './components/Trade.vue';
 export default {
   components: {
     GameBoard,
     PlayerUI,
     PlayerHistory,
     MainModal, 
+    Trade, 
     
   },
 
   setup() {
-    
+    const isTradeVisible = ref(false);
+
+function toggleTrade() {
+  isTradeVisible.value = !isTradeVisible.value;
+  console.log("trading tottlge")
+}
+
     const isModalActive = ref(false)
     
     
@@ -103,6 +112,9 @@ export default {
       isModalActive, 
       CPULand, 
       openModal, 
+      toggleTrade,
+      isTradeVisible, 
+     
       
       
     };
@@ -141,16 +153,16 @@ export default {
     <img src="./assets/rollanimation.gif" @click="rollDice" id="rolldicebutton" class="w-24 h-12 cursor-pointer" alt="Roll Dice" />
 
     <img src="./assets/dollar.png" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
-    <img src="./assets/property.jpg" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
+    <img src="./assets/property.jpg" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="trade " />
     <img src="./assets/stats.png" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
 </div>
-  
+<Trade v-if="isTradeVisible" @closeTrade="toggleTrade" />
     <div id ="topButtonsWrapper" class="w-[30vw] h-20  absolute top-[-1%] left-[15%]  flex justify-around items-center rounded-lg border-2 border-slate-200 bg-blue-200   ">
   <img src="./assets/house.png" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
   <img src="./assets/hotel.png" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
   <img src="./assets/bank.png" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
   <img src="./assets/dollar.png" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
-  <img src="./assets/property.jpg" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
+  <img src="./assets/property.jpg" @click="toggleTrade" id="tradebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
   <img src="./assets/stats.png" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
 </div>
   
@@ -159,9 +171,10 @@ export default {
 @player1turnfinished="CPULand"
 @auctionfinished="CPULand">
 </MainModal>
+
       
       
-     
+     <Trade v-if="isTradeVisible" @closeTrade="toggleTrade"  />
     
 
   
