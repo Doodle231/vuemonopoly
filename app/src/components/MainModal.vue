@@ -73,11 +73,12 @@ export default {
         alert("Sorry, but you don't have enough cash to buy this property");
       } else {
         player1.cash -= price;
-        spacesArray[player1.location].owner = activePlayer.name;
+        spacesArray[player1.location].owner = player1.name
         player1.numberofProperties += 1;
-        activePlayer.propertyowned.push(spacesArray[player1.location]);
+        player1.propertyowned.push(spacesArray[player1.location]);
         player1.statusMessage = `${player1.name} has purchased ${spacesArray[player1.location].name}`;
         context.emit('player1turnfinished');
+        console.log(player1.propertyowned)
       }
     }
 

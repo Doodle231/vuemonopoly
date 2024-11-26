@@ -1,140 +1,85 @@
 <template>
-  <div class="w-[100vw] h-[100vh] bg-blue-400 absolute top-12 left-0 right-0 text-[3vw] text-center">
-    Players
-    <div class="playersTradeWrapper text-lg flex w-[90vw] h-[80vh] justify-around mt-12 ml-16">
-      <div id="player1" class="flex-1 text-center bg-blue-200 w-24 h-12 rounded-md border-green-200">
-        <div id="playerName" class="h-12 text-center pt-4 text-[2vw]">{{ player1.name }}</div>
-        <img src="../assets/avatar1.jpg" class="h-[12vh]" />
-        <div id="player1money" class="text-green-400 text-xl bg-white h-12">$ {{ player1.cash }}</div>
-        <button @click="selectPlayer('player1')" class="w-24 h-24 bg-green-400">Select Player</button>
-      </div>
-
-      <div id="player2" class="flex-1 text-center bg-blue-200 w-24 h-12 rounded-md border-green-200">
-        <div id="playerName" class="h-12 text-center pt-4 text-[2vw]">{{ CPUPlayer.name }}</div>
-        <img src="../assets/avatar1.jpg" class="h-[12vh]" />
-        <div id="player2money" class="text-green-400 text-xl bg-white h-12">$ {{ CPUPlayer.cash }}</div>
-        <button @click="selectPlayer('CPUPlayer')" class="w-24 h-24 bg-green-400">Select Player</button>
-      </div>
-
-      <div id="player3" class="flex-1 text-center bg-blue-200 w-24 h-12 rounded-md border-green-200">
-        <div id="playerName" class="h-12 text-center pt-4 text-[2vw]">{{ CPUPlayer2.name }}</div>
-        <img src="../assets/avatar1.jpg" class="h-[12vh]" />
-        <div id="player3money" class="text-green-400 text-xl bg-white h-12">$ {{ CPUPlayer2.cash }}</div>
-        <button @click="selectPlayer('CPUPlayer2')" class="w-24 h-24 bg-green-400">Select Player</button>
-      </div>
-      
-      <div id="player4" class="flex-1 text-center bg-blue-200 w-24 h-12 rounded-md border-green-200">
-        <div id="playerName" class="h-12 text-center pt-4 text-[2vw]">{{ CPUPlayer3.name }}</div>
-        <img src="../assets/avatar1.jpg" class="h-[12vh]" />
-        <div id="player4money" class="text-green-400 text-xl bg-white h-12">$ {{ CPUPlayer3.cash }}</div>
-        <button @click="selectPlayer('CPUPlayer3')" class="w-24 h-24 bg-green-400">Select Player</button>
+  <div class="w-[100vw] h-[100vh] bg-gray-300 absolute top-12 left-0 right-0  text-center">
+    <div class="flex ml-72">
+      <img src="../assets/avatar2.jpg" class="w-44 h-44 rounded-xl mr-44">
+      <div>
+        <div>Cash: {{ player1.cash }}</div> 
+        <div>Railroads: {{ player1.railroads }}</div>
+        <div>Utilities: {{ player1.utilities }}</div>
+        <div>Number of Properties: {{ player1.numberofProperties }}</div>
       </div>
     </div>
+  
+    <div id="offerbox" class="absolute right-36 top-4 bg-yellow-300 w-72 h-24">
+      Your offer
+    </div>
+  
 
-    <div id="tradeMenu" class="absolute bottom-44 text-lg bg-blue-300 flex gap-48 ml-44">
-      <p class="text-[2vw]">What you are offering</p>
-      <div id="giveTrade">
-        <select v-model="offering" class="text-[2vw]">
-          <option value="cash">Cash</option>
-          <option value="property">Property</option>
-        </select>
 
-        <div v-if="offering === 'cash'" class="mt-4">
-          <label for="cashAmount" class="text-[2vw]">How much cash?</label>
-          <input v-model="cashAmount" type="number" id="cashAmount" class="text-[2vw] border mt-2" placeholder="Enter amount" />
+
+    <!-- Container for trade cards -->
+    <div id="tradecards" class="flex flex-wrap justify-center gap-6 mt-8">
+      <!-- Loop through owned properties and create trade cards -->
+      <div
+        v-for="(property, index) in ownedProperties"
+        :key="index"
+        class="card-top h-[20%] border-black border-2 text-black mt-4 w-[calc(25%-1.5rem)]" 
+        :style="{ flexBasis: 'calc(25% - 1.5rem)' }"
+      >
+        <div :class="getPropertyCardColor(property)" class="card-title text-center pt-4 h-24">
+          <h2>{{ property.name }}</h2>
         </div>
 
-        <div v-if="offering === 'property'" class="mt-4">
-          <label for="propertySelect" class="text-[2vw]">Select Property</label>
-          <select v-model="selectedProperty" id="propertySelect" class="text-[2vw] mt-2">
-            <option v-for="(property, index) in player1.propertyowned" :key="index" :value="property">{{ property.name }}</option>
-          </select>
+        <div class="card-body p-[20px] w-full bg-white border-black border-r-2">
+          <div v-if="property.rent" class="rent">Rent: {{ property.rent }}</div>
+          <div class="rent-1house">Rent with 1 house: {{ property.house1rent }}</div>
+          <div class="rent-2house">Rent with 2 houses: {{ property.house2rent }}</div>
+          <div class="rent-3house">Rent with 3 houses: {{ property.house3rent }}</div>
+          <div class="rent-4house">Rent with 4 houses: {{ property.house4rent }}</div>
+          <div class="rent-hotel">Rent with hotel: {{ property.hotelrent }}</div>
+          <div class="house-cost">Houses cost: {{ property.eachhousecost }}</div>
         </div>
-      </div>
-
-      <p class="text-[2vw]">What you want</p>
-      <div id="getTrade">
-        <select v-model="wanting" class="text-[2vw]">
-          <option value="cash">Cash</option>
-          <option value="property">Property</option>
-        </select>
-
-        <div v-if="wanting === 'cash'" class="mt-4">
-          <label for="wantedCash" class="text-[2vw]">How much cash?</label>
-          <input v-model="wantedCash" type="number" id="wantedCash" class="text-[2vw] border mt-2" placeholder="Enter amount" />
-        </div>
-
-        <div v-if="wanting === 'property'" class="mt-4">
-          <label for="wantedProperty" class="text-[2vw]">Select Property</label>
-          <select v-model="wantedProperty" id="wantedProperty" class="text-[2vw] mt-2">
-            <option v-for="(property, index) in selectedPlayer?.properties" :key="index" :value="property">{{ property.name }}</option>
-          </select>
-        </div>
+        <button class ="bg-green-400 w-full">Trade</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { player1, CPUPlayer, CPUPlayer2, CPUPlayer3 } from "../composables/players";
-import { ref } from "vue";
+import { player1 } from "../composables/players";
+import { spacesArray } from "../composables/spaces";
 
 export default {
   name: "Trade",
-  props: [],
-  setup(props) {
-    const offering = ref("cash");
-    const wanting = ref("cash");
+  setup() {
+    // Filter spaces where the owner is player1
+    const ownedProperties = spacesArray.filter(space => space.owner === player1.name);
 
-    const cashAmount = ref(0);
-    const selectedProperty = ref("");
-    const wantedCash = ref(0);
-    const wantedProperty = ref("");
-
-    const selectedPlayer = ref(null);
-
-    // Function to select the player and update the available properties and cash
-    const selectPlayer = (player) => {
-    
-      switch (player) {
-        case 'player1':
-          selectedPlayer.value = player1;
-          break;
-        case 'CPUPlayer':
-          selectedPlayer.value = CPUPlayer;
-          break;
-        case 'CPUPlayer2':
-          selectedPlayer.value = CPUPlayer2;
-          break;
-        case 'CPUPlayer3':
-          selectedPlayer.value = CPUPlayer3;
-          break;
-        default:
-          selectedPlayer.value = null;
-          
+    function getPropertyCardColor(property) {
+     console.log(ownedProperties)
+     console.log(spacesArray)
+      // Dynamically set card colors based on the property type
+      if (property.name === "Mediterranean Avenue" || property.name === "Baltic Avenue") {
+        return "bg-orange-900";
+      } else if (property.name === "Oriental Avenue" || property.name === "Vermont Avenue") {
+        return "bg-blue-200";
+      } else if (property.name === "St. Charles Place") {
+        return "bg-fuchsia-500";
+      } else if (property.name === "Reading Railroad") {
+        return "bg-red-600";
+      } else if (property.name === "Pennsylvania Railroad") {
+        return "bg-yellow-600";
+      } else {
+        return "bg-green-600";
       }
-      console.log(selectedPlayer.value.propertyowned)
-    };
+    }
 
     return {
       player1,
-      CPUPlayer,
-      CPUPlayer2,
-      CPUPlayer3,
-      offering,
-      wanting,
-      cashAmount,
-      selectedProperty,
-      wantedCash,
-      wantedProperty,
-      selectedPlayer,
-      selectPlayer, 
-     
+      ownedProperties,  // Array of properties player1 owns
+      getPropertyCardColor
     };
-  },
+  }
 };
 </script>
 
-<style scoped>
-/* Add your custom styles here */
-</style>

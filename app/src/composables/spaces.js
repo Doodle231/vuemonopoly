@@ -1,4 +1,6 @@
+import { reactive } from "vue"
 
+    
     const SpaceObjects = (price, name, rent , colorsetrent, house1rent, house2rent, 
     house3rent, house4rent, hotelrent, eachhousecost) => {
       
@@ -81,11 +83,11 @@
      communitychest3.spaceType = "unique"
      chance3.spaceType = "unique"
      
-   let spacesArray = [go, mediterennan, communitychest, balticavenue, incometax, readingRailRoad, 
+   let spacesArray = reactive([go, mediterennan, communitychest, balticavenue, incometax, readingRailRoad, 
       orientalAvenue, chance, vermont, connecticut, justVisiting, stcharlesPlace, electricCompany, statesavenue, virginia, 
       pennRR, stJamesPlace, communitychest2, tenessee, newYork, freeParking, kentucky, chance2, indiana, illinois, 
       band0, atlantic, ventur, waterworks, marvinGardens  ,jail, pacific, northCarolina,communitychest3,  pennsylvania, shortLine, chance3, parkPlace, 
-      luxuryTax, boardWalk]
+      luxuryTax, boardWalk])
 
  
 
