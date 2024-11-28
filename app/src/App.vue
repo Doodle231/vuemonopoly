@@ -153,17 +153,14 @@ function toggleTrade() {
     <img src="./assets/rollanimation.gif" @click="rollDice" id="rolldicebutton" class="w-24 h-12 cursor-pointer" alt="Roll Dice" />
 
     <img src="./assets/dollar.png" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
-    <img src="./assets/property.jpg" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="trade " />
+    <img src="./assets/property.jpg" @click="toggleTrade" id="tradebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="trade " />
     <img src="./assets/stats.png" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
 </div>
 <Trade v-if="isTradeVisible" @closeTrade="toggleTrade" />
-    <div id ="topButtonsWrapper" class="w-[30vw] h-20  absolute top-[-1%] left-[15%]  flex justify-around items-center rounded-lg border-2 border-slate-200 bg-blue-200   ">
-  <img src="./assets/house.png" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
-  <img src="./assets/hotel.png" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
-  <img src="./assets/bank.png" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
-  <img src="./assets/dollar.png" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
-  <img src="./assets/property.jpg" @click="toggleTrade" id="tradebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
-  <img src="./assets/stats.png" @click="rollDice" id="rolldicebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="Roll Dice " />
+    <div id ="topButtonsWrapper" class="w-[40vw] h-20  absolute z-[999] top-0 left-[15%]  
+    flex  border-4 border-slate-200 bg-red-700   ">
+    <div id ="gameText" class= "text-[3vw] text-white ml-72 mt-0 	font-extrabold">Monopoly</div>
+    <img src="./assets/property.jpg" @click="toggleTrade" id="tradebutton" class="w-8 h-8 cursor-pointer  top-[5%] " alt="trade " />
 </div>
   
 
